@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <initializer_list>
 
-#include "../AbstractSequencedCollection.hpp"
+#include "AbstractSequencedCollection.hpp"
 
 namespace Forge
 {

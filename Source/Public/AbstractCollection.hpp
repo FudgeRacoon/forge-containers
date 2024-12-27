@@ -21,7 +21,7 @@ namespace Forge
 	 * @tparam InElementType The type of element the collection stores.
 	 * @tparam InAllocatorPolicy The type of allocator policy the collection uses to manage its memory.
 	 */
-	template <typename InElementType, typename InAllocatorPolicy = HeapAllocationPolicy>
+	template <typename InElementType, typename InAllocatorPolicy>
 	class AbstractCollection : public IIterable<InElementType>
 	{
 	public:
