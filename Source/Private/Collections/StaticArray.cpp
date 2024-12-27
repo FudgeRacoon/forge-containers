@@ -1,22 +1,22 @@
-#include "../../Public/Collections/StaticArray.hpp"
+#include "Collections/StaticArray.hpp"
 
 namespace Forge
 {
 	template<typename InType>
 	static FORGE_FORCE_INLINE Void _shift_elements_forward(InType* data, Size to, Size steps, Size jumps = 0)
-	{	
+	{
 		while(steps--) {
 			MoveObject(data + to, *(data + ((to + 1) + jumps)));
-			
+
 			to++;
 		}
 	}
 	template<typename InType>
 	static FORGE_FORCE_INLINE Void _shift_elements_backward(InType* data, Size to, Size steps, Size jumps = 0)
-	{	
+	{
 		while(steps--) {
 			MoveObject(data + (to + jumps), *(data + (to - 1)));
-			
+
 			to--;
 		}
 	}
@@ -48,7 +48,7 @@ namespace Forge
 
 	template <typename InElementType, Size InCapacity>
 	StaticArray<InElementType, InCapacity>::StaticArray()
-		: AbstractSequencedCollection<InElementType, NoAllocationPolicy>(0, InCapacity)
+		: BaseType(0, InCapacity)
 	{
 		if (this->m_capacity <= 0)
 			throw ::std::invalid_argument("The capacity must be greater than 0");
@@ -59,7 +59,7 @@ namespace Forge
 	}
 	template <typename InElementType, Size InCapacity>
 	StaticArray<InElementType, InCapacity>::StaticArray(ElementType value, Size count)
-		: AbstractSequencedCollection<InElementType, NoAllocationPolicy>(count, InCapacity)
+		: BaseType(count, InCapacity)
 	{
 		if (this->m_capacity <= 0)
 			throw ::std::invalid_argument("The capacity must be greater than 0");
@@ -76,7 +76,7 @@ namespace Forge
 	}
 	template <typename InElementType, Size InCapacity>
 	StaticArray<InElementType, InCapacity>::StaticArray(ElementTypePtr buffer, Size count)
-		: AbstractSequencedCollection<InElementType, NoAllocationPolicy>(count, InCapacity)
+		: BaseType(count, InCapacity)
 	{
 		if (this->m_capacity <= 0)
 			throw ::std::invalid_argument("The capacity must be greater than 0");
@@ -92,7 +92,7 @@ namespace Forge
 	}
 	template<typename InElementType, Size InCapacity>
 	StaticArray<InElementType, InCapacity>::StaticArray(std::initializer_list<ElementType> init_list)
-		: AbstractSequencedCollection<InElementType, NoAllocationPolicy>(init_list.size(), InCapacity)
+		: BaseType(init_list.size(), InCapacity)
 	{
 		if (this->m_capacity <= 0)
 			throw ::std::invalid_argument("The capacity must be greater than 0");
@@ -104,18 +104,18 @@ namespace Forge
 
 		MemoryZero(this->m_data, InCapacity * sizeof(ElementType));
 
-		MoveArray(this->m_data, const_cast<InElementType*>(init_list.begin()), this->m_count);
+		CopyArray(this->m_data, const_cast<InElementType*>(init_list.begin()), this->m_count);
 	}
 
 	template <typename InElementType, Size InCapacity>
 	StaticArray<InElementType, InCapacity>::StaticArray(SelfTypeRRef other)
-		: AbstractSequencedCollection<InElementType, NoAllocationPolicy>(other.m_count, InCapacity)
+		: BaseType(other.m_count, InCapacity)
 	{
 		*this = ::std::move(other);
 	}
 	template <typename InElementType, Size InCapacity>
 	StaticArray<InElementType, InCapacity>::StaticArray(ConstSelfTypeLRef other)
-		: AbstractSequencedCollection<InElementType, NoAllocationPolicy>(other.m_count, InCapacity)
+		: BaseType(other.m_count, InCapacity)
 	{
 		*this = other;
 	}
@@ -150,7 +150,7 @@ namespace Forge
 		if (this != &other)
 		{
 			this->Clear();
-			
+
 			this->m_count = other.m_count;
 
 			CopyArray(this->m_data, const_cast<ElementTypePtr>(other.m_data), other.m_capacity);
@@ -225,7 +225,7 @@ namespace Forge
 	{
 		if (this->IsEmpty())
 			throw ::std::length_error("The static array is empty");
-	
+
 		this->m_count--;
 	}
 	template <typename InElementType, Size InCapacity>
@@ -325,7 +325,7 @@ namespace Forge
 
 		this->m_count -= range_difference;
 	}
-	
+
 	template <typename InElementType, Size InCapacity>
 	Void StaticArray<InElementType, InCapacity>::Assign(Size index, ElementTypeRRef element)
 	{
@@ -380,7 +380,7 @@ namespace Forge
 		Size shift_steps = this->m_count - index;
 
 		_shift_elements_backward(this->m_data, shift_to, shift_steps);
-		
+
 		this->m_data[index] = ::std::move(element);
 
 		this->m_count++;
@@ -445,11 +445,9 @@ namespace Forge
 			this->PushBack(collection[counter]);
 	}
 	template <typename InElementType, Size InCapacity>
-	Bool StaticArray<InElementType, InCapacity>::RemoveAll(typename BaseType::ConstSelfTypeLRef collection)
+	Void StaticArray<InElementType, InCapacity>::RemoveAll(typename BaseType::ConstSelfTypeLRef collection)
 	{
 		std::logic_error("RemoveAll is not implemented in version 0.1");
-
-		return false;
 	}
 	template <typename InElementType, Size InCapacity>
 	Bool StaticArray<InElementType, InCapacity>::ContainsAll(typename BaseType::ConstSelfTypeLRef collection)

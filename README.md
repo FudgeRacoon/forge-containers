@@ -15,7 +15,7 @@ If you're a developer who finds the C++ Standard Template Library (STL) cumberso
 	Each data structure inherits from core abstract classes, ensuring that all of them share a consistent interface. This uniformity makes it easier for the client to use the library as they expect similar functionality from other data structures.
 
 - **Generic Data Structures**
-	The library is centered around providing a comprehensive and efficient set of data structures which utilizes C++ templates to support generic programming, allowing clients to create data structure instances for any type. This helps reduce code duplications in client's code leading to a more maintainable and consice codebase. 
+	The library is centered around providing a comprehensive and efficient set of data structures which utilizes C++ templates to support generic programming, allowing clients to create data structure instances for any type. This helps reduce code duplications in client's code leading to a more maintainable and consice codebase.
 
 - **Generic Utility Algorithms**
 	Common algorithms, such as sorting, searching and filtering are implemented in a seperate utility module as generic functions that can operate on any type of data structure enforcing polymorphism. This design encapsulates complex algorithms, and allows the client to avoid writing boilerplate code. Algorithms also utilize multithreading capability to boost perfomance.
@@ -37,40 +37,41 @@ If you're a developer who finds the C++ Standard Template Library (STL) cumberso
 
 #include <Forge/StaticArray.hpp">
 
-int main() {
-    // Create a StaticArray with a maximum capacity of 10 integers
+int main()
+{
+	// Create a StaticArray with a maximum capacity of 10 integers
 	// using the initializer list constructor
-    Forge::StaticArray<int, 10> my_array = { 1, 2, 3, 4, 5 };
+	Forge::StaticArray<int, 10> my_array = { 1, 2, 3, 4, 5 };
 
-    // Add elements to the back of the array
-    my_array.PushBack(6);
-    my_array.PushBack(7);
-    my_array.PushBack(8);
+	// Add elements to the back of the array
+	my_array.PushBack(6);
+	my_array.PushBack(7);
+	my_array.PushBack(8);
 
-    // Remove elements in indices 0, 1 and 2 effectively shifting
+	// Remove elements in indices 0, 1 and 2 effectively shifting
 	// all elements in their place.
-    my_array.Remove(0);
-    my_array.Remove(1);
-    my_array.Remove(2);
+	my_array.Remove(0);
+	my_array.Remove(1);
+	my_array.Remove(2);
 
 	// Insert elements 10, 11, 12 in indices 0, 1 and 2 effectively
 	// shifting all elements to accomodate their place.
-    my_array.Insert(0, 10);
-    my_array.Insert(1, 11);
-    my_array.Insert(2, 12);
+	my_array.Insert(0, 10);
+	my_array.Insert(1, 11);
+	my_array.Insert(2, 12);
 
-	// Access elements by index using index operator
-    std::cout << "Element at index 1: " << my_array[1]<< std::endl;
+	// Access elements by index using Array Subscript Operator
+	std::cout << "Element at index 1: " << my_array[1]<< std::endl;
 
 	// Access elements by index using At function for bound-checking
-    std::cout << "Element at index 1: " << my_array.At(1) << std::endl;
+	std::cout << "Element at index 1: " << my_array.At(1) << std::endl;
 
-    // Check the current size, count and capacity
-	std::cout << "Current size (memory allocated in bytes): " << my_array.GetCount() << std::endl;
-    std::cout << "Current count (number of elements occupied): " << my_array.GetCount() << std::endl;
-    std::cout << "Maximum capacity (maximum number of elements): " << my_array.GetCapacity() << std::endl;
+	// Check the current size, count and capacity
+	std::cout << "Current size (memory allocated in bytes): " << my_array.GetSize() << std::endl;
+	std::cout << "Current count (number of elements occupied): " << my_array.GetCount() << std::endl;
+	std::cout << "Maximum capacity (maximum number of elements): " << my_array.GetCapacity() << std::endl;
 
-    return 0;
+	return 0;
 }
 ```
 
@@ -117,9 +118,8 @@ cmake --build .
 #### Prerequisites
 To use Forge Containers:
 
-- A C++17 or later compatible compiler is required (e.g., GCC 7+, Clang 5+, or MSVC 2017+).
+- A C++17 or later compatible compiler is required (e.g., GCC 14+).
 
 To build and run the tests:
 
-- CMake 3.10 or later.
-- A compatible build system (e.g., make or ninja).
+- CMake 3.30 or later.

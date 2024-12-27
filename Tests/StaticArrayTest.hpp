@@ -7,7 +7,7 @@
 
 using namespace Forge;
 
-class StaticArrayTest : public testing::Test 
+class StaticArrayTest : public testing::Test
 {
 public:
 	using DEFAULT_TYPE = I32;
@@ -137,7 +137,7 @@ TEST_F(StaticArrayTest, MoveConstructor_EmptyArray_MoveArrayToRecieverArray)
 
 	EXPECT_FALSE(test_array_to_recieve.IsFull());
 	EXPECT_FALSE(test_array_to_recieve.IsEmpty());
-	
+
 	EXPECT_EQ(test_array_to_move.GetSize(), DEFAULT_SIZE);
 	EXPECT_EQ(test_array_to_move.GetCount(), 0);
 	EXPECT_EQ(test_array_to_move.GetCapacity(), DEFAULT_CAPACITY);
@@ -156,7 +156,7 @@ TEST_F(StaticArrayTest, MoveConstructor_EmptyArray_MoveArrayToRecieverArray)
 // -------------------------
 // Copy Constructor.
 // -------------------------
-TEST_F(StaticArrayTest, CopyConstructor_EmptyArray_CopyArrayToRecieverArray) 
+TEST_F(StaticArrayTest, CopyConstructor_EmptyArray_CopyArrayToRecieverArray)
 {
 	StaticArray<DEFAULT_TYPE, DEFAULT_CAPACITY> test_array_to_copy = StaticArray<DEFAULT_TYPE, DEFAULT_CAPACITY>(DEFAULT_BUFFER, DEFAULT_COUNT);
 	StaticArray<DEFAULT_TYPE, DEFAULT_CAPACITY> test_array_to_recieve = test_array_to_copy;
@@ -185,7 +185,7 @@ TEST_F(StaticArrayTest, CopyConstructor_EmptyArray_CopyArrayToRecieverArray)
 // -------------------------
 // Assignment Operators.
 // -------------------------
-TEST_F(StaticArrayTest, MoveAssignmentOperator_EmptyArray_MoveArrayToRecieverArray) 
+TEST_F(StaticArrayTest, MoveAssignmentOperator_EmptyArray_MoveArrayToRecieverArray)
 {
 	StaticArray<DEFAULT_TYPE, DEFAULT_CAPACITY> test_array_to_move = StaticArray<DEFAULT_TYPE, DEFAULT_CAPACITY>(DEFAULT_BUFFER, DEFAULT_COUNT);
 	StaticArray<DEFAULT_TYPE, DEFAULT_CAPACITY> test_array_to_recieve;
@@ -197,7 +197,7 @@ TEST_F(StaticArrayTest, MoveAssignmentOperator_EmptyArray_MoveArrayToRecieverArr
 
 	EXPECT_FALSE(test_array_to_recieve.IsFull());
 	EXPECT_FALSE(test_array_to_recieve.IsEmpty());
-	
+
 	EXPECT_EQ(test_array_to_move.GetSize(), DEFAULT_SIZE);
 	EXPECT_EQ(test_array_to_move.GetCount(), 0);
 	EXPECT_EQ(test_array_to_move.GetCapacity(), DEFAULT_CAPACITY);
@@ -212,7 +212,7 @@ TEST_F(StaticArrayTest, MoveAssignmentOperator_EmptyArray_MoveArrayToRecieverArr
 	for (Size counter = 0; counter < DEFAULT_COUNT; counter++)
 		EXPECT_EQ(test_array_to_recieve[counter], DEFAULT_BUFFER[counter]);
 }
-TEST_F(StaticArrayTest, CopyAssignmentOperator_EmptyArray_CopyArrayToRecieverArray) 
+TEST_F(StaticArrayTest, CopyAssignmentOperator_EmptyArray_CopyArrayToRecieverArray)
 {
 	StaticArray<DEFAULT_TYPE, DEFAULT_CAPACITY> test_array_to_copy = StaticArray<DEFAULT_TYPE, DEFAULT_CAPACITY>(DEFAULT_BUFFER, DEFAULT_COUNT);
 	StaticArray<DEFAULT_TYPE, DEFAULT_CAPACITY> test_array_to_recieve;
@@ -547,7 +547,7 @@ TEST_F(StaticArrayTest, Erase_NonEmptyArray_ThrowsOutOfRangeException)
 TEST_F(StaticArrayTest, Erase_NonEmptyArray_ErasesTheFirstElement)
 {
 	StaticArray<DEFAULT_TYPE, DEFAULT_CAPACITY> test_nonempty_array(DEFAULT_BUFFER, DEFAULT_COUNT);
-	
+
 	EXPECT_EQ(test_nonempty_array.GetSize(), DEFAULT_SIZE);
 	EXPECT_EQ(test_nonempty_array.GetCount(), DEFAULT_COUNT);
 	EXPECT_EQ(test_nonempty_array.GetCapacity(), DEFAULT_CAPACITY);
@@ -820,7 +820,7 @@ TEST_F(StaticArrayTest, AssignRange_NonEmptyArray_ThrowsOutOfRangeException)
 TEST_F(StaticArrayTest, AssignRange_NonEmptyArray_AssignsSecondHalfElementsFromFullArray)
 {
 	StaticArray<DEFAULT_TYPE, DEFAULT_CAPACITY> test_nonempty_array(DEFAULT_BUFFER, DEFAULT_COUNT);
-	
+
 	auto itr_begin = dynamic_cast<StaticArray<DEFAULT_TYPE, DEFAULT_CAPACITY>::Iterator&>(fixture_full_array.GetBeginIterator());
 	auto itr_final = dynamic_cast<StaticArray<DEFAULT_TYPE, DEFAULT_CAPACITY>::Iterator&>(fixture_full_array.GetFinalIterator());
 
@@ -1069,7 +1069,7 @@ TEST_F(StaticArrayTest, Clear_NonEmptyArray_DestructsAndSetsMemoryToZero)
 
 	EXPECT_FALSE(test_array.IsFull());
 	EXPECT_FALSE(test_array.IsEmpty());
-	
+
 	EXPECT_EQ(test_array.GetSize(), DEFAULT_SIZE);
 	EXPECT_EQ(test_array.GetCount(), DEFAULT_COUNT);
 	EXPECT_EQ(test_array.GetCapacity(), DEFAULT_CAPACITY);
@@ -1081,7 +1081,7 @@ TEST_F(StaticArrayTest, Clear_NonEmptyArray_DestructsAndSetsMemoryToZero)
 
 	EXPECT_FALSE(test_array.IsFull());
 	EXPECT_TRUE(test_array.IsEmpty());
-	
+
 	EXPECT_EQ(test_array.GetSize(), DEFAULT_SIZE);
 	EXPECT_EQ(test_array.GetCount(), 0);
 	EXPECT_EQ(test_array.GetCapacity(), DEFAULT_CAPACITY);

@@ -15,15 +15,42 @@
 namespace Forge
 {
 	/**
-	 * @brief This abstract class serves as the root interface for all collections
-	 * and provides common functionality.
+	 * @brief This abstract class serves as the root interface for all collections and provides
+	 * common functionality.
 	 *
-	 * @tparam InElementType The type of element the collection contains.
+	 * @tparam InElementType The type of element the collection stores.
 	 * @tparam InAllocatorPolicy The type of allocator policy the collection uses to manage its memory.
 	 */
 	template <typename InElementType, typename InAllocatorPolicy = HeapAllocationPolicy>
 	class AbstractCollection : public IIterable<InElementType>
 	{
+	public:
+		using SelfType = AbstractCollection<InElementType, InAllocatorPolicy>;
+		using SelfTypePtr = AbstractCollection<InElementType, InAllocatorPolicy>*;
+		using SelfTypeLRef = AbstractCollection<InElementType, InAllocatorPolicy>&;
+		using SelfTypeRRef = AbstractCollection<InElementType, InAllocatorPolicy>&&;
+		using ConstSelfType = const AbstractCollection<InElementType, InAllocatorPolicy>;
+		using ConstSelfTypePtr = const AbstractCollection<InElementType, InAllocatorPolicy>*;
+		using ConstSelfTypeLRef = const AbstractCollection<InElementType, InAllocatorPolicy>&;
+
+	public:
+		using ElementType = InElementType;
+		using ElementTypePtr = InElementType*;
+		using ElementTypeLRef = InElementType&;
+		using ElementTypeRRef = InElementType&&;
+		using ConstElementType = const InElementType;
+		using ConstElementTypePtr = const InElementType*;
+		using ConstElementTypeLRef = const InElementType&;
+
+	public:
+		using AllocatorType = InAllocatorPolicy;
+		using AllocatorTypePtr = InAllocatorPolicy*;
+		using AllocatorTypeLRef = InAllocatorPolicy&;
+		using AllocatorTypeRRef = InAllocatorPolicy&&;
+		using ConstAllocatorType = const InAllocatorPolicy;
+		using ConstAllocatorTypePtr = const InAllocatorPolicy*;
+		using ConstAllocatorTypeLRef = const InAllocatorPolicy&;
+
 	protected:
 		Size m_count;
 		Size m_capacity;
@@ -45,16 +72,16 @@ namespace Forge
 
 	public:
 		/**
-		 * @brief Checks whether this collection is full and is at maximum capacity.
+		 * @brief Checks if this collection is at maximum capacity.
 		 *
-		 * @return True if this collection is full, otherwise false.
+		 * @return True if at maximum capacity, otherwise false.
 		 */
 		virtual Bool IsFull() const;
 
 		/**
-		 * @brief Checks whether this collection is empty and not storing any elements.
+		 * @brief Checks if this collection is not storing any elements.
 		 *
-		 * @return True if this collection is empty.
+		 * @return True if not storing any elements, otherwise false.
 		 */
 		virtual Bool IsEmpty() const;
 
@@ -67,16 +94,16 @@ namespace Forge
 		virtual Size GetSize() const;
 
 		/**
-		 * @brief Gets the number of elements currently stored in this collection.
+		 * @brief Gets the number of elements stored in this collection.
 		 *
-		 * @return Size storing the number of elements.
+		 * @return Size storing the number of elements stored.
 		 */
 		virtual Size GetCount() const;
 
 		/**
 		 * @brief Gets the maximum number of elements that can be stored in this collection.
 		 *
-		 * @return Size storing the maximum number of elements.
+		 * @return Size storing the maximum number of elements that can be stored.
 		 */
 		virtual Size GetCapacity() const;
 
@@ -91,12 +118,30 @@ namespace Forge
 	 * @brief This abstract class serves as the root interface for all collections
 	 * and provides common functionality.
 	 *
-	 * @tparam InElementType The type of element the collection contains.
+	 * @tparam InElementType The type of element the collection stores.
 	 * @tparam InAllocatorPolicy The type of allocator the collection uses to manage its memory.
 	 */
 	template <typename InElementType>
 	class AbstractCollection<InElementType, NoAllocationPolicy> : public IIterable<InElementType>
 	{
+	public:
+		using SelfType = AbstractCollection<InElementType, NoAllocationPolicy>;
+		using SelfTypePtr = AbstractCollection<InElementType, NoAllocationPolicy>*;
+		using SelfTypeLRef = AbstractCollection<InElementType, NoAllocationPolicy>&;
+		using SelfTypeRRef = AbstractCollection<InElementType, NoAllocationPolicy>&&;
+		using ConstSelfType = const AbstractCollection<InElementType, NoAllocationPolicy>;
+		using ConstSelfTypePtr = const AbstractCollection<InElementType, NoAllocationPolicy>*;
+		using ConstSelfTypeLRef = const AbstractCollection<InElementType, NoAllocationPolicy>&;
+
+	public:
+		using ElementType = InElementType;
+		using ElementTypePtr = InElementType*;
+		using ElementTypeLRef = InElementType&;
+		using ElementTypeRRef = InElementType&&;
+		using ConstElementType = const InElementType;
+		using ConstElementTypePtr = const InElementType*;
+		using ConstElementTypeLRef = const InElementType&;
+
 	protected:
 		Size m_count;
 		Size m_capacity;
@@ -115,16 +160,16 @@ namespace Forge
 
 	public:
 		/**
-		 * @brief Checks whether this collection is full and is at maximum capacity.
+		 * @brief Checks if this collection is at maximum capacity.
 		 *
-		 * @return True if this collection is full, otherwise false.
+		 * @return True if at maximum capacity, otherwise false.
 		 */
 		virtual Bool IsFull() const;
 
 		/**
-		 * @brief Checks whether this collection is empty and not storing any elements.
+		 * @brief Checks if this collection is not storing any elements.
 		 *
-		 * @return True if this collection is empty.
+		 * @return True if not storing any elements, otherwise false.
 		 */
 		virtual Bool IsEmpty() const;
 
@@ -137,16 +182,16 @@ namespace Forge
 		virtual Size GetSize() const;
 
 		/**
-		 * @brief Gets the number of elements currently stored in this collection.
+		 * @brief Gets the number of elements stored in this collection.
 		 *
-		 * @return Size storing the number of elements.
+		 * @return Size storing the number of elements stored.
 		 */
 		virtual Size GetCount() const;
 
 		/**
 		 * @brief Gets the maximum number of elements that can be stored in this collection.
 		 *
-		 * @return Size storing the maximum number of elements.
+		 * @return Size storing the maximum number of elements that can be stored.
 		 */
 		virtual Size GetCapacity() const;
 

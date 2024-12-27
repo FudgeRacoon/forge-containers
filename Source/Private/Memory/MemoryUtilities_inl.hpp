@@ -14,7 +14,7 @@ namespace Forge
 	{
 		MemorySet(destination, 0, size);
 	}
-	
+
 	FORGE_FORCE_INLINE Size MemoryDistance(VoidPtr start_address, VoidPtr final_address)
 	{
 		return reinterpret_cast<Size>(start_address) - reinterpret_cast<Size>(final_address);

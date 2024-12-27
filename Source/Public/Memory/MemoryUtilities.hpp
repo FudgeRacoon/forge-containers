@@ -18,7 +18,7 @@ namespace Forge {
 	 * @param[in] start_address The start address.
 	 * @param[in] final_address the final address.
 	 *
-	 * @returns The number of bytes between the start and final address. 
+	 * @returns The number of bytes between the start and final address.
 	 */
 	Size MemoryDistance(VoidPtr start_address, VoidPtr final_address);
 
@@ -30,7 +30,7 @@ namespace Forge {
 	 * @param[in]  size  The number of bytes of the memory block to be set to the specified value.
 	 */
 	Void MemorySet(VoidPtr destination, Byte value, Size size);
-	
+
 	/**
 	 * @brief Moves the data from the source memory block to the destination memory block.
 	 *
@@ -65,7 +65,7 @@ namespace Forge {
 	 *
 	 * @tparam InType The type of object to construct.
 	 * @tparam InArgs The type of constructor arguments.
-	 * 
+	 *
 	 * @param[out] destination The memory location where the object will be constructed at.
 	 * @param[in]  arguments  The constructor arguments to forward to the constructor of InType.
 	 */
@@ -77,7 +77,7 @@ namespace Forge {
 	 *
 	 * @tparam InType The type of objects to construct.
 	 * @tparam InArgs The type of constructor arguments.
-	 * 
+	 *
 	 * @param[out] destination The memory location where the objects will be constructed at.
 	 * @param[in]  count The number of objects to construct at the specified memory location.
 	 * @param[in]  arguments The constructor arguments to forward to the constructor of InType.
@@ -89,7 +89,7 @@ namespace Forge {
 	 * @brief Destructs an object of type InType at the specified memory location.
 	 *
 	 * @tparam InType The type of object to destruct.
-	 * 
+	 *
 	 * @param[out] destination The memory location where the object will be destructed at.
 	 */
 	template<typename InType>
@@ -97,9 +97,9 @@ namespace Forge {
 
 	/**
  	 * @brief Destructs an array of objects of type InType at the specified memory location.
- 	 * 
+ 	 *
  	 * @tparam InType The type of objects to destruct.
-	 * 
+	 *
  	 * @param[out] destination The memory location where the objects will be destructed at.
  	 * @param[in]  count The number of objects to destruct at the specified memory location.
  	 */
@@ -109,18 +109,18 @@ namespace Forge {
 	/** @brief Moves an object of type InType to the specified memory location.
 	 *
 	 * @tparam InType The type of object to move.
-	 * 
+	 *
 	 * @param[out] destination The memory location where the object will be moved to.
 	 * @param[in]  object The object to move to the specified memory location.
 	 */
 	template<typename InType>
 	Void MoveObject(InType* destination, InType object);
-	
+
 	/**
 	 * @brief Moves an array of objects of type InType to the specified memory location.
 	 *
 	 * @tparam InType The type of object to copy.
-	 * 
+	 *
 	 * @param[out] destination The memory location where the objects will be moved to.
 	 * @param[in]  source The memory location where the objects will be moved from.
 	 * @param[in]  count The number of objects to move to the specified memory location.
@@ -131,7 +131,7 @@ namespace Forge {
 	/** @brief Copies an object of type InType to the specified memory location.
 	 *
 	 * @tparam InType The type of object to copy.
-	 * 
+	 *
 	 * @param[out] destination The memory location where the object will be copied to.
 	 * @param[in]  object The object to copy to the specified memory location.
 	 */
@@ -142,7 +142,7 @@ namespace Forge {
 	 * @brief Copies an array of objects of type InType to the specified memory location.
 	 *
 	 * @tparam InType The type of object to copy.
-	 * 
+	 *
 	 * @param[out] destination The memory location where the objects will be copied to.
 	 * @param[in]  source The memory location where the objects will be copied from.
 	 * @param[in]  count  The number of objects to copy to the specified memory location.
@@ -153,7 +153,7 @@ namespace Forge {
 	/** @brief Constructs an object of type InType at the specified memory location by moving.
 	 *
 	 * @tparam InType The type of object to move construct.
-	 * 
+	 *
 	 * @param[out] destination The memory location where the object will be constructed at.
 	 * @param[in]  object  The object to construct at the specified memory location.
 	 */
@@ -163,7 +163,7 @@ namespace Forge {
 	/** @brief Constructs an array of objects of type InType at the specified memory location by moving.
 	 *
 	 * @tparam InType The type of object to move construct.
-	 * 
+	 *
 	 * @param[out] destination The memory location where the objects will be constructed at.
 	 * @param[in]  source The memory location where the objects will be moved from.
 	 * @param[in]  count The number of objects to move to the specified memory location.
@@ -174,7 +174,7 @@ namespace Forge {
 	/** @brief Constructs an object of type InType at the specified memory location by copying.
 	 *
 	 * @tparam InType The type of object to copy construct.
-	 * 
+	 *
 	 * @param[out] destination The memory location where the object will be constructed at.
 	 * @param[in]  object The object to construct at the specified memory location.
 	 */
@@ -184,7 +184,7 @@ namespace Forge {
 	/** @brief Constructs an array of objects of type InType at the specified memory location by copying.
 	 *
 	 * @tparam InType The type of object to move construct.
-	 * 
+	 *
 	 * @param[out] destination The memory location where the objects will be constructed at.
 	 * @param[in]  source The memory location where the objects will be copied from.
 	 * @param[in]  count The number of objects to copy to the specified memory location.
@@ -192,7 +192,7 @@ namespace Forge {
 	template<typename InType>
 	Void CopyConstructArray(InType* destination, InType* source, Size count);
 }
-	
+
 #include "../../Private/Memory/MemoryUtilities_inl.hpp"
 
 #endif

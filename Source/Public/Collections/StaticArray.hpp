@@ -11,7 +11,7 @@
 namespace Forge
 {
 	/**
-	* @brief A fixed-capacity array implementation that provides efficient storage and access to 
+	* @brief A fixed-capacity array implementation that provides efficient storage and access to
 	* elements.
 	*
 	* The StaticArray class template is designed to hold a fixed number of elements.The class is
@@ -111,28 +111,28 @@ namespace Forge
 
 	public:
 		/**
-		 * @brief Default constructor.
+		 * @brief Default Constructor.
 		 *
 		 * Initializes an empty static array with the specified capacity.
 		 */
 		StaticArray();
 
 		/**
-		 * @brief Fill constructor.
-		 * 
+		 * @brief Fill Constructor.
+		 *
 		 * Initializes a static array and fills it with the specified value and count.
 		 */
 		StaticArray(ElementType value, Size count);
 
 		/**
-		 * @brief Buffer constructor.
-		 * 
+		 * @brief Buffer Constructor.
+		 *
 		 * Initializes a static array and fills it with the specified buffer and count.
 		 */
 		StaticArray(ElementTypePtr buffer, Size count);
-		
+
 		/**
-		 * @brief Initializer list constructor.
+		 * @brief Initializer list Constructor.
 		 *
 		 * Initializes an empty static array with the specified initializer list.
 		 */
@@ -140,12 +140,12 @@ namespace Forge
 
 	public:
 		/**
-		 * @brief Move constructor.
+		 * @brief Move Constructor.
 		 */
 		StaticArray(SelfTypeRRef other);
 
 		/**
-		 * @brief Copy constructor.
+		 * @brief Copy Constructor.
 		 */
 		StaticArray(ConstSelfTypeLRef other);
 
@@ -157,45 +157,45 @@ namespace Forge
 
 	public:
 		/**
-		 * @brief Move assignment operator.
+		 * @brief Move Assignment Operator.
 		 */
 		SelfTypeLRef operator=(SelfTypeRRef other);
 
 		/**
-		 * @brief Copy assignment operator.
+		 * @brief Copy Assignment Operator.
 		 */
 		SelfTypeLRef operator=(ConstSelfTypeLRef other);
 
 	public:
 		/**
-		 * @brief Access operator.
+		 * @brief Array Subscript Operator.
 		 */
 		ElementTypeLRef operator[](Size index) override;
 
 		/**
-		 * @brief Const access operator.
+		 * @brief Array Subscript Operator.
 		 */
 		ConstElementTypeLRef operator[](Size index) const override;
 
 	public:
 		/**
-		 * @brief Retrieves the begin iterator.
-		 * 
-		 * @return A reference to the begin iterator.
+		 * @brief Gets an iterator pointing to the first element in the collection.
+		 *
+		 * @return IIterator pointing to the first element.
 		 */
 		typename AbstractIterator<ElementType>::SelfTypeLRef GetBeginIterator() override;
 
 		/**
-		 * @brief Retrieves the final iterator.
-		 * 
-		 * @return A reference to the final iterator.
+		 * @brief Gets an iterator pointing to one past the last element in the collection.
+		 *
+		 * @return IIterator pointing to one past the last element.
 		 */
 		typename AbstractIterator<ElementType>::SelfTypeLRef GetFinalIterator() override;
 
 	public:
 		/**
 		 * @brief Retrieves a reference to the element at a specified position, with bounds checking.
-		 * 
+		 *
 		 * @param index The position of the element to retrieve.
 		 * @return A reference to the element at the specified position.
 		 */
@@ -203,7 +203,7 @@ namespace Forge
 
 		/**
 		 * @brief Retrieves a const reference to the element at a specified position, with bounds checking.
-		 * 
+		 *
 		 * @param index The position of the element to retrieve.
 		 * @return A const reference to the element at the specified position.
 		 */
@@ -218,62 +218,54 @@ namespace Forge
 		ConstElementTypePtr GetRawData() const override;
 
 		/**
-		 * @brief Retrieves the last element in the array.
+		 * @brief Retrieves the last element in the collection.
 		 *
-		 * @return A const reference to the last element in the array.
+		 * @return A const reference to the last element.
 		 */
 		ConstElementTypeLRef GetBackElement() const override;
 
 		/**
-		 * @brief Retrieves the first element in the array.
+		 * @brief Retrieves the first element in the collection.
 		 *
-		 * @return A const reference to the first element in the array.
+		 * @return A const reference to the first element.
 		 */
 		ConstElementTypeLRef GetFrontElement() const override;
 
 	public:
 		/**
-		 * @brief Removes the last element in the array.
+		 * @brief Removes the last element in the collection.
 		 */
 		Void PopBack() override;
 
 		/**
-		 * @brief Removes the first element in the array.
+		 * @brief Removes the first element in the collection.
 		 */
 		Void PopFront() override;
 
 	public:
 		/**
-		 * @brief Adds an element to the end of the array.
-		 *
-		 * Moves the specified element into the end of the array.
+		 * @brief Inserts an element at the end of the collection.
 		 *
 		 * @param element The element to be moved and added.
 		 */
 		Void PushBack(ElementTypeRRef element) override;
 
 		/**
-		 * @brief Adds an element to the start of the array.
-		 *
-		 * Moves the specified element into the front of the array.
+		 * @brief Inserts an element at the start of the collection.
 		 *
 		 * @param element The element to be moved and added.
 		 */
 		Void PushFront(ElementTypeRRef element) override;
 
 		/**
-		 * @brief Adds an element to the end of the array.
-		 *
-		 * Copies the specified element into the end of the array.
+		 * @brief Inserts an element at the end of the collection.
 		 *
 		 * @param element The element to be copied and added.
 		 */
 		Void PushBack(ConstElementTypeLRef element) override;
 
-		/**
-		 * @brief Adds an element to the start of the array.
-		 *
-		 * Copies the specified element into the start of the array.
+				/**
+		 * @brief Inserts an element at the start of the collection.
 		 *
 		 * @param element The element to be copied and added.
 		 */
@@ -291,15 +283,13 @@ namespace Forge
 		 * @brief Removes the elements in the range [iterator_first, iterator_last) exclusive.
 		 *
 		 * @param iterator_first An iterator pointing to the first element to remove.
-		 * @param iterator_last An iterator pointing to the last element to remove.
+		 * @param iterator_last An iterator pointing to the past last element to remove.
 		 */
 		Void Remove(typename AbstractIterator<ElementType>::SelfTypeLRef iterator_first, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_last) override;
 
 	public:
 		/**
-		 * @brief Assigns a new value to the element at the specified index.
-		 *
-		 * Moves the specified element into the position pointed to by the iterator.
+		 * @brief Assigns a new element at the specified index.
 		 *
 		 * @param index The position of the element to assign.
 		 * @param element The new element to be moved and assigned.
@@ -307,9 +297,7 @@ namespace Forge
 		Void Assign(Size index, ElementTypeRRef element) override;
 
 		/**
-		 * @brief Assigns a new value to the element at the specified index.
-		 *
-		 * Copies the specified element into the position pointed to by the iterator.
+		 * @brief Assigns a new element at the specified index.
 		 *
 		 * @param index The position of the element to assign.
 		 * @param element The new element to be copied and assigned.
@@ -321,15 +309,13 @@ namespace Forge
 		 *
 		 * @param index The position of the elements to assign.
 		 * @param iterator_first An iterator pointing to the first element to assign.
-		 * @param iterator_last An iterator pointing to the last element to assign.
+		 * @param iterator_last An iterator pointing to the past last element to assign.
 		 */
 		Void Assign(Size index, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_first, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_last) override;
 
 	public:
 		/**
 		 * @brief Inserts an element at the specified index.
-		 *
-		 * Moves the specified element into the position pointed to by the iterator.
 		 *
 		 * @param index The position of the element to insert.
 		 * @param element The element to be moved and inserted.
@@ -339,52 +325,56 @@ namespace Forge
 		/**
 		 * @brief Inserts an element at the specified index.
 		 *
-		 * Copies the specified element into the position pointed to by the iterator.
-		 *
 		 * @param index The position of the element to insert.
 		 * @param element The element to be copied and inserted.
 		 */
 		Void Insert(Size index, ConstElementTypeLRef element) override;
 
 		/**
-		 * @brief Inserts the elements at the specified index in the range [iterator_first,
-		 * iterator_last) exclusive.
+		 * @brief Inserts the elements at the specified index in the range [iterator_first, iterator_last) exclusive.
 		 *
 		 * @param index The position of the elements to insert.
 		 * @param iterator_first An iterator pointing to the first element to insert.
-		 * @param iterator_last An iterator pointing to the last element to insert.
+		 * @param iterator_last An iterator pointing to the past last element to insert.
 		 */
 		Void Insert(Size index, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_first, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_last) override;
 
 	public:
 		/**
-		 * @brief Inserts all elements from the specified collection into this array.
+		 * @brief Inserts all elements in the specified collection into this collection.
 		 *
-		 * @param collection The collection whose elements are to be inserted.
-		 * 
-		 * @return True if the insertion was successful and no duplicates were added.
+		 * This function inserts all elements and does not verify wether duplicates exist. Any
+		 * element that already exists in this collection will still insert another copy, without
+		 * raising errors or exceptions.
+		 *
+		 * @param collection The collection whose elements are to be inserted into this collection.
 		 */
 		Void InsertAll(typename BaseType::ConstSelfTypeLRef collection) override;
 
 		/**
-		 * @brief Removes all the elements in the specified collection from this array.
+		 * @brief Removes all the elements in the specified collection from this collection.
 		 *
-		 * @param[in] collection The collection containing elements to be removed from this array.
+		 * This function removes the elements it can find and does not verify whether all elements
+		 * were successfully located and removed. Any elements in the specified collection that are
+		 * not found in this collection are simply ignored, without raising errors or exceptions.
 		 *
-		 * @return True if removal was successful and the elements were found.
+		 * @param[in] collection The collection whose elements are to be removed from this collection.
 		 */
-		Bool RemoveAll(typename BaseType::ConstSelfTypeLRef collection) override;
+		Void RemoveAll(typename BaseType::ConstSelfTypeLRef collection) override;
 
 		/**
-		 * @brief Searches for all the elements in the specified collection in this array.
+		 * @brief Searches all the elements in the specified collection in this collection.
 		 *
-		 * @param[in] collection The collection containing elements to be  search for in this array.
+		 * @param[in] collection The collection whose elements are to be searched in this collection.
 		 *
-		 * @return True if the specified elements were found in this array.
+		 * @return True if all the elements were found, otherwise false.
 		 */
 		Bool ContainsAll(typename BaseType::ConstSelfTypeLRef collection) override;
 
 	public:
+		/**
+		 * @brief Removes all the elements from this collections.
+		 */
 		Void Clear() override;
 	};
 }

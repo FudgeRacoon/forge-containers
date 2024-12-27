@@ -35,8 +35,7 @@ namespace Forge
 	template<typename InElementType>
 	FORGE_FORCE_INLINE typename AbstractIterator<InElementType>::SelfTypeLRef AbstractIterator<InElementType>::operator =(SelfTypeRRef other)
 	{
-		MemoryCopy(this, &other, sizeof(SelfType));
-		MemoryZero(&other, sizeof(SelfType));
+		MemoryMove(this, &other, sizeof(SelfType));
 
 		return *this;
 	}
@@ -44,7 +43,7 @@ namespace Forge
 	FORGE_FORCE_INLINE typename AbstractIterator<InElementType>::SelfTypeLRef AbstractIterator<InElementType>::operator =(ConstSelfTypeLRef other)
 	{
 		MemoryCopy(this, const_cast<SelfTypePtr>(&other), sizeof(SelfType));
-		
+
 		return *this;
 	}
 

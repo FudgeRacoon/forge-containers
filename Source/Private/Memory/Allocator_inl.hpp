@@ -18,7 +18,7 @@ namespace Forge
 	{
 		return m_used_space;
 	}
-	
+
 	template<typename AllocationPolicy>
 	FORGE_FORCE_INLINE Size Allocator<AllocationPolicy>::GetPeakSize()
 	{
@@ -48,7 +48,7 @@ namespace Forge
 
 	template<typename AllocationPolicy>
 	FORGE_FORCE_INLINE Void Allocator<AllocationPolicy>::Initialize(Size capacity)
-	{   
+	{
 		m_capacity = capacity;
 		m_used_space = 0.0f;
 
@@ -148,7 +148,7 @@ namespace Forge
 
 		return new_address;
 	}
-	
+
 	template<typename AllocationPolicy>
 	FORGE_FORCE_INLINE Void Allocator<AllocationPolicy>::Deallocate(VoidPtr address)
 	{
@@ -164,7 +164,7 @@ namespace Forge
 	template<typename AllocationPolicy>
 	template<typename InType, typename... Args>
 	FORGE_FORCE_INLINE InType* Allocator<AllocationPolicy>::ConstructObject(Args... arguments)
-	{   
+	{
 		InType* object_address = reinterpret_cast<InType*>(this->Allocate(sizeof(InType)));
 
 		ConstructObject(object_address, ::std::forward(arguments... ));
@@ -181,7 +181,7 @@ namespace Forge
 
 		return object_array_address;
 	}
-	
+
 	template<typename AllocationPolicy>
 	template<typename InType>
 	FORGE_FORCE_INLINE Void Allocator<AllocationPolicy>::DestructObject(InType* address)

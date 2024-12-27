@@ -5,20 +5,27 @@
 
 namespace Forge
 {
-	template <typename InElementType, typename InAllocatorType>
-	class AbstractSequencedCollection : public AbstractCollection<InElementType, InAllocatorType>
+	/**
+	 * @brief This abstract class serves as the base interface for collections that maintain a
+	 * specific sequence of elements, providing common functionality for ordered collections.
+	 *
+	 * @tparam InElementType The type of element the collection stores.
+	 * @tparam InAllocatorPolicy The type of allocator policy the collection uses to manage its memory.
+	 */
+	template <typename InElementType, typename InAllocatorPolicy>
+	class AbstractSequencedCollection : public AbstractCollection<InElementType, InAllocatorPolicy>
 	{
 	public:
-		using BaseType = AbstractCollection<InElementType, InAllocatorType>;
+		using BaseType = AbstractCollection<InElementType, InAllocatorPolicy>;
 
 	public:
-		using SelfType = AbstractSequencedCollection<InElementType, InAllocatorType>;
-		using SelfTypePtr = AbstractSequencedCollection<InElementType, InAllocatorType>*;
-		using SelfTypeLRef = AbstractSequencedCollection<InElementType, InAllocatorType>&;
-		using SelfTypeRRef = AbstractSequencedCollection<InElementType, InAllocatorType>&&;
-		using ConstSelfType = const AbstractSequencedCollection<InElementType, InAllocatorType>;
-		using ConstSelfTypePtr = const AbstractSequencedCollection<InElementType, InAllocatorType>*;
-		using ConstSelfTypeLRef = const AbstractSequencedCollection<InElementType, InAllocatorType>&;
+		using SelfType = AbstractSequencedCollection<InElementType, InAllocatorPolicy>;
+		using SelfTypePtr = AbstractSequencedCollection<InElementType, InAllocatorPolicy>*;
+		using SelfTypeLRef = AbstractSequencedCollection<InElementType, InAllocatorPolicy>&;
+		using SelfTypeRRef = AbstractSequencedCollection<InElementType, InAllocatorPolicy>&&;
+		using ConstSelfType = const AbstractSequencedCollection<InElementType, InAllocatorPolicy>;
+		using ConstSelfTypePtr = const AbstractSequencedCollection<InElementType, InAllocatorPolicy>*;
+		using ConstSelfTypeLRef = const AbstractSequencedCollection<InElementType, InAllocatorPolicy>&;
 
 	public:
 		using ElementType = InElementType;
@@ -30,20 +37,20 @@ namespace Forge
 		using ConstElementTypeLRef = const InElementType&;
 
 	public:
-		using AllocatorType = InAllocatorType;
-		using AllocatorTypePtr = InAllocatorType*;
-		using AllocatorTypeLRef = InAllocatorType&;
-		using AllocatorTypeRRef = InAllocatorType&&;
-		using ConstAllocatorType = const InAllocatorType;
-		using ConstAllocatorTypePtr = const InAllocatorType*;
-		using ConstAllocatorTypeLRef = const InAllocatorType&;
+		using AllocatorPolicy = InAllocatorPolicy;
+		using AllocatorPolicyPtr = InAllocatorPolicy*;
+		using AllocatorPolicyLRef = InAllocatorPolicy&;
+		using AllocatorPolicyRRef = InAllocatorPolicy&&;
+		using ConstAllocatorPolicy = const InAllocatorPolicy;
+		using ConstAllocatorPolicyPtr = const InAllocatorPolicy*;
+		using ConstAllocatorPolicyLRef = const InAllocatorPolicy&;
 
 	public:
 		/**
 		 * @brief Default Constructor.
 		 */
 		AbstractSequencedCollection(Size count, Size capacity)
-			: AbstractCollection<ElementType, AllocatorType>(count, capacity) {}
+			: AbstractCollection<ElementType, AllocatorPolicy>(count, capacity) {}
 
 	public:
 		/**
@@ -53,12 +60,12 @@ namespace Forge
 
 	public:
 		/**
-		 * @brief Member Access Operator.
+		 * @brief Array Subscript Operator.
 		 */
 		virtual ElementTypeLRef operator[](Size index) = 0;
 
 		/**
-		 * @brief Member Access Operator.
+		 * @brief Array Subscript Operator.
 		 */
 		virtual ConstElementTypeLRef operator[](Size index) const = 0;
 
@@ -90,14 +97,14 @@ namespace Forge
 		/**
 		 * @brief Retrieves the last element in the collection.
 		 *
-		 * @return A const reference to the last element in the collection.
+		 * @return A const reference to the last element.
 		 */
 		virtual ConstElementTypeLRef GetBackElement() const = 0;
 
 		/**
 		 * @brief Retrieves the first element in the collection.
 		 *
-		 * @return A const reference to the first element in the collection.
+		 * @return A const reference to the first element.
 		 */
 		virtual ConstElementTypeLRef GetFrontElement() const = 0;
 
@@ -114,36 +121,28 @@ namespace Forge
 
 	public:
 		/**
-		 * @brief Adds an element to the end of the collection.
-		 *
-		 * Moves the specified element into the end of the collection.
+		 * @brief Inserts an element at the end of the collection.
 		 *
 		 * @param element The element to be moved and added.
 		 */
 		virtual Void PushBack(ElementTypeRRef element) = 0;
 
 		/**
-		 * @brief Adds an element to the start of the collection.
-		 *
-		 * Moves the specified element into the front of the collection.
+		 * @brief Inserts an element at the start of the collection.
 		 *
 		 * @param element The element to be moved and added.
 		 */
 		virtual Void PushFront(ElementTypeRRef element) = 0;
 
 		/**
-		 * @brief Adds an element to the end of the collection.
-		 *
-		 * Copies the specified element into the end of the collection.
+		 * @brief Inserts an element at the end of the collection.
 		 *
 		 * @param element The element to be copied and added.
 		 */
 		virtual Void PushBack(ConstElementTypeLRef element) = 0;
 
 		/**
-		 * @brief Adds an element to the start of the collection.
-		 *
-		 * Copies the specified element into the start of the collection.
+		 * @brief Inserts an element at the start of the collection.
 		 *
 		 * @param element The element to be copied and added.
 		 */
@@ -161,15 +160,13 @@ namespace Forge
 		 * @brief Removes the elements in the range [iterator_first, iterator_last) exclusive.
 		 *
 		 * @param iterator_first An iterator pointing to the first element to remove.
-		 * @param iterator_last An iterator pointing to the last element to remove.
+		 * @param iterator_last An iterator pointing to the past last element to remove.
 		 */
 		virtual Void Remove(typename AbstractIterator<ElementType>::SelfTypeLRef iterator_first, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_last) = 0;
 
 	public:
 		/**
-		 * @brief Assigns a new value to the element at the specified index.
-		 *
-		 * Moves the specified element into the position pointed to by the iterator.
+		 * @brief Assigns a new element at the specified index.
 		 *
 		 * @param index The position of the element to assign.
 		 * @param element The new element to be moved and assigned.
@@ -177,9 +174,7 @@ namespace Forge
 		virtual Void Assign(Size index, ElementTypeRRef element) = 0;
 
 		/**
-		 * @brief Assigns a new value to the element at the specified index.
-		 *
-		 * Copies the specified element into the position pointed to by the iterator.
+		 * @brief Assigns a new element at the specified index.
 		 *
 		 * @param index The position of the element to assign.
 		 * @param element The new element to be copied and assigned.
@@ -191,15 +186,13 @@ namespace Forge
 		 *
 		 * @param index The position of the elements to assign.
 		 * @param iterator_first An iterator pointing to the first element to assign.
-		 * @param iterator_last An iterator pointing to the last element to assign.
+		 * @param iterator_last An iterator pointing to the past last element to assign.
 		 */
 		virtual Void Assign(Size index, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_first, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_last) = 0;
 
 	public:
 		/**
 		 * @brief Inserts an element at the specified index.
-		 *
-		 * Moves the specified element into the position pointed to by the iterator.
 		 *
 		 * @param index The position of the element to insert.
 		 * @param element The element to be moved and inserted.
@@ -209,48 +202,49 @@ namespace Forge
 		/**
 		 * @brief Inserts an element at the specified index.
 		 *
-		 * Copies the specified element into the position pointed to by the iterator.
-		 *
 		 * @param index The position of the element to insert.
 		 * @param element The element to be copied and inserted.
 		 */
 		virtual Void Insert(Size index, ConstElementTypeLRef element) = 0;
 
 		/**
-		 * @brief Inserts the elements at the specified index in the range [iterator_first,
-		 * iterator_last) exclusive.
+		 * @brief Inserts the elements at the specified index in the range [iterator_first, iterator_last) exclusive.
 		 *
 		 * @param index The position of the elements to insert.
 		 * @param iterator_first An iterator pointing to the first element to insert.
-		 * @param iterator_last An iterator pointing to the last element to insert.
+		 * @param iterator_last An iterator pointing to the past last element to insert.
 		 */
 		virtual Void Insert(Size index, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_first, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_last) = 0;
 
 	public:
 		/**
-		 * @brief Inserts all elements from the specified collection into this collection.
+		 * @brief Inserts all elements in the specified collection into this collection.
 		 *
-		 * @param collection The collection whose elements are to be inserted.
+		 * This function inserts all elements and does not verify wether duplicates exist. Any
+		 * element that already exists in this collection will still insert another copy, without
+		 * raising errors or exceptions.
 		 *
-		 * @return True if the insertion was successful and no duplicates were added, if supported.
+		 * @param collection The collection whose elements are to be inserted into this collection.
 		 */
 		virtual Void InsertAll(ConstSelfTypeLRef collection) = 0;
 
 		/**
 		 * @brief Removes all the elements in the specified collection from this collection.
 		 *
-		 * @param[in] collection The collection containing elements to be removed from this collection.
+		 * This function removes the elements it can find and does not verify whether all elements
+		 * were successfully located and removed. Any elements in the specified collection that are
+		 * not found in this collection are simply ignored, without raising errors or exceptions.
 		 *
-		 * @return True if removal was successful and the elements were found.
+		 * @param[in] collection The collection whose elements are to be removed from this collection.
 		 */
-		virtual Bool RemoveAll(ConstSelfTypeLRef collection) = 0;
+		virtual Void RemoveAll(ConstSelfTypeLRef collection) = 0;
 
 		/**
-		 * @brief Searches for all the elements in the specified collection in this collection.
+		 * @brief Searches all the elements in the specified collection in this collection.
 		 *
-		 * @param[in] collection The collection containing elements to be  search for in this collection.
+		 * @param[in] collection The collection whose elements are to be searched in this collection.
 		 *
-		 * @return True if the specified elements were found in this collection.
+		 * @return True if all the elements were found, otherwise false.
 		 */
 		virtual Bool ContainsAll(ConstSelfTypeLRef collection) = 0;
 	};

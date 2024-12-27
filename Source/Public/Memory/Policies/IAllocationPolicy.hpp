@@ -13,7 +13,7 @@ namespace Forge {
 	public:
 		/**
 		 * @brief Initializes a memory pool with the specified capacity using a defined memory policy.
-		 * 
+		 *
 		 * @param capacity The size of the memory pool to initialize in bytes.
 		 */
 		virtual Void Initialize(Size capacity) = 0;
@@ -26,28 +26,28 @@ namespace Forge {
 	public:
 		/**
 		 * @brief Allocates a block of memory with the specified size and alignment from the memory pool.
-		 * 
+		 *
 		 * @param[in] size      The size of the memory block to allocate in bytes.
 		 * @param[in] alignment The alignment requirement for the memory block. Must be a power of two.
-		 * 
+		 *
 		 * @return VoidPtr storing the address the allocated memory block.
 		 */
 		virtual VoidPtr Allocate(Size size, Size alignment) = 0;
 
 		/**
 		 * @brief Allocates a block of memory with the specified size and alignment from the memory pool.
-		 * 
+		 *
 		 * @param[in] size      The size of the memory block to allocate in bytes.
 		 * @param[in] value     The value to set each byte of the memory block to.
 		 * @param[in] alignment The alignment requirement for the memory block. Must be a power of two.
-		 * 
+		 *
 		 * @return VoidPtr storing the address the allocated memory block.
 		 */
 		virtual VoidPtr Callocate(Size size, Byte value, Size alignment) = 0;
 
 		/**
 		 * @brief Reallocates a block of memory with the specified size and alignment from the memory pool.
-		 *  
+		 *
 		 * @param[in] address   The address of the memory block to reallocate.
 		 * @param[in] size      The size of the memory block to reallocate in bytes.
 		 * @param[in] alignment The alignment requirement for the memory block. Must be a power of two.
@@ -59,7 +59,7 @@ namespace Forge {
 	public:
 		/**
 		 * @brief Deallocates a block of memory with the specified address from the memory pool.
-		 * 
+		 *
 		 * @param[in] address The address of the memory block to deallocate.
 		 */
 		virtual Void Deallocate(VoidPtr address) = 0;

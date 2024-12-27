@@ -124,44 +124,32 @@ namespace Forge
 	public:
 		/**
 		 * @brief Arrow Operator.
-		 *
-		 * Returns the data the iterator is pointing to.
 		 */
 		virtual ElementTypePtr operator->() = 0;
 
 		/**
 		 * @brief Derefrence Operator.
-		 *
-		 * Returns the data the iterator is pointing to.
 		 */
 		virtual ElementTypeLRef operator*() = 0;
 
 	public:
 		/**
 		 * @brief Pre-increment Operator.
-		 *
-		 * Moves the iterator to the next element in the container.
 		 */
 		virtual SelfTypeLRef operator++() = 0;
 
 		/**
 		 * @brief Pre-decrement Operator.
-		 *
-		 * Moves the iterator to the previous element in the container.
 		 */
 		virtual SelfTypeLRef operator--() = 0;
 
 		/**
 		 * @brief Post-increment Operator.
-		 *
-		 * Moves the iterator to the next element in the container.
 		 */
 		virtual SelfTypeLRef operator++(I32) = 0;
 
 		/**
 		 * @brief Post-decrement Operator.
-		 *
-		 * Moves the iterator to the previous element in the container.
 		 */
 		virtual SelfTypeLRef operator--(I32) = 0;
 	};

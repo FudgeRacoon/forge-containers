@@ -5,38 +5,38 @@
 
 namespace Forge
 {
-	template<typename InElementType, typename InAllocatorType>
-	FORGE_FORCE_INLINE AbstractCollection<InElementType, InAllocatorType>::AbstractCollection(Size count, Size capacity)
+	template<typename InElementType, typename InAllocatorPolicy>
+	FORGE_FORCE_INLINE AbstractCollection<InElementType, InAllocatorPolicy>::AbstractCollection(Size count, Size capacity)
 		: m_count(count), m_capacity(capacity)
 	{
-		m_allocator.Initialize(capacity);
+		this->m_allocator.Initialize(capacity);
 	}
 
-	template<typename InElementType, typename InAllocatorType>
-	FORGE_FORCE_INLINE Bool AbstractCollection<InElementType, InAllocatorType>::IsFull() const
+	template<typename InElementType, typename InAllocatorPolicy>
+	FORGE_FORCE_INLINE Bool AbstractCollection<InElementType, InAllocatorPolicy>::IsFull() const
 	{
-		return m_count == m_capacity;
+		return this->m_count == this->m_capacity;
 	}
-	template<typename InElementType, typename InAllocatorType>
-	FORGE_FORCE_INLINE Bool AbstractCollection<InElementType, InAllocatorType>::IsEmpty() const
+	template<typename InElementType, typename InAllocatorPolicy>
+	FORGE_FORCE_INLINE Bool AbstractCollection<InElementType, InAllocatorPolicy>::IsEmpty() const
 	{
-		return m_count == 0;
+		return this->m_count == 0;
 	}
 
-	template<typename InElementType, typename InAllocatorType>
-	FORGE_FORCE_INLINE Size AbstractCollection<InElementType, InAllocatorType>::GetSize() const
+	template<typename InElementType, typename InAllocatorPolicy>
+	FORGE_FORCE_INLINE Size AbstractCollection<InElementType, InAllocatorPolicy>::GetSize() const
 	{
-		return m_count * sizeof(InElementType);
+		return this->m_count * sizeof(InElementType);
 	}
-	template<typename InElementType, typename InAllocatorType>
-	FORGE_FORCE_INLINE Size AbstractCollection<InElementType, InAllocatorType>::GetCount() const
+	template<typename InElementType, typename InAllocatorPolicy>
+	FORGE_FORCE_INLINE Size AbstractCollection<InElementType, InAllocatorPolicy>::GetCount() const
 	{
-		return m_count;
+		return this->m_count;
 	}
-	template<typename InElementType, typename InAllocatorType>
-	FORGE_FORCE_INLINE Size AbstractCollection<InElementType, InAllocatorType>::GetCapacity() const
+	template<typename InElementType, typename InAllocatorPolicy>
+	FORGE_FORCE_INLINE Size AbstractCollection<InElementType, InAllocatorPolicy>::GetCapacity() const
 	{
-		return m_capacity;
+		return this->m_capacity;
 	}
 
 
@@ -47,28 +47,28 @@ namespace Forge
 	template<typename InElementType>
 	FORGE_FORCE_INLINE Bool AbstractCollection<InElementType, NoAllocationPolicy>::IsFull() const
 	{
-		return m_count == m_capacity;
+		return this->m_count == this->m_capacity;
 	}
 	template<typename InElementType>
 	FORGE_FORCE_INLINE Bool AbstractCollection<InElementType, NoAllocationPolicy>::IsEmpty() const
 	{
-		return m_count == 0;
+		return this->m_count == 0;
 	}
 
 	template<typename InElementType>
 	FORGE_FORCE_INLINE Size AbstractCollection<InElementType, NoAllocationPolicy>::GetSize() const
 	{
-		return m_capacity * sizeof(InElementType);
+		return this->m_capacity * sizeof(InElementType);
 	}
 	template<typename InElementType>
 	FORGE_FORCE_INLINE Size AbstractCollection<InElementType, NoAllocationPolicy>::GetCount() const
 	{
-		return m_count;
+		return this->m_count;
 	}
 	template<typename InElementType>
 	FORGE_FORCE_INLINE Size AbstractCollection<InElementType, NoAllocationPolicy>::GetCapacity() const
 	{
-		return m_capacity;
+		return this->m_capacity;
 	}
 }
 
