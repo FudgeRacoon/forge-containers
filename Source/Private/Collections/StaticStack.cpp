@@ -51,8 +51,8 @@ namespace Forge
 		{
 			this->m_container = ::std::move(other.m_container);
 
-			other.m_count = other.m_count;
-			this->m_count = this->m_container.m_count;
+			other.m_count = other.m_container.m_count;
+			this->m_count = this->m_container.GetCount();
 		}
 
 		return *this;
@@ -64,8 +64,7 @@ namespace Forge
 		{
 			this->m_container = other.m_container;
 
-			other.m_count = other.m_count;
-			this->m_count = this->m_container.m_count;
+			this->m_count = this->m_container.GetCount();
 		}
 
 		return *this;
@@ -148,7 +147,7 @@ namespace Forge
 	{
 		this->m_container.PopBack();
 
-		this->m_count = this->m_container.m_count;
+		this->m_count = this->m_container.GetCount();
 	}
 	template<typename InElementType, Size InCapacity>
 	Void StaticStack<InElementType, InCapacity>::PopFront()
@@ -161,7 +160,7 @@ namespace Forge
 	{
 		this->m_container.PushBack(::std::move(element));
 
-		this->m_count = this->m_container.m_count;
+		this->m_count = this->m_container.GetCount();
 	}
 	template<typename InElementType, Size InCapacity>
 	Void StaticStack<InElementType, InCapacity>::PushFront(ElementTypeRRef element)
@@ -173,7 +172,7 @@ namespace Forge
 	{
 		this->m_container.PushBack(element);
 
-		this->m_count = this->m_container.m_count;
+		this->m_count = this->m_container.GetCount();
 	}
 	template<typename InElementType, Size InCapacity>
 	Void StaticStack<InElementType, InCapacity>::PushFront(ConstElementTypeLRef element)
@@ -245,6 +244,6 @@ namespace Forge
 	{
 		this->m_container.Clear();
 
-		this->m_count = this->m_container.m_count;
+		this->m_count = this->m_container.GetCount();
 	}
 }

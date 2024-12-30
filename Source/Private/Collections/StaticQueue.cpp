@@ -51,7 +51,7 @@ namespace Forge
 		{
 			this->m_container = ::std::move(other.m_container);
 
-			other.m_count = other.m_count;
+			other.m_count = other.m_container.m_count;
 			this->m_count = this->m_container.m_count;
 		}
 
@@ -64,8 +64,7 @@ namespace Forge
 		{
 			this->m_container = other.m_container;
 
-			other.m_count = other.m_count;
-			this->m_count = this->m_container.m_count;
+			this->m_count = this->m_container.GetCount();
 		}
 
 		return *this;
@@ -80,6 +79,29 @@ namespace Forge
 	typename StaticQueue<InElementType, InCapacity>::ConstElementTypeLRef StaticQueue<InElementType, InCapacity>::operator[](Size index) const
 	{
 		throw std::logic_error("A queue only allows access to the front element");
+	}
+
+	template<typename InElementType, Size InCapacity>
+	typename StaticQueue<InElementType, InCapacity>::ConstElementTypeLRef StaticQueue<InElementType, InCapacity>::Peek() const
+	{
+		return this->GetFrontElement();
+	}
+
+	template<typename InElementType, Size InCapacity>
+	Void StaticQueue<InElementType, InCapacity>::Pop()
+	{
+		this->PopFront();
+	}
+
+	template<typename InElementType, Size InCapacity>
+	Void StaticQueue<InElementType, InCapacity>::Push(ElementTypeRRef element)
+	{
+		this->PushBack(::std::move(element));
+	}
+	template<typename InElementType, Size InCapacity>
+	Void StaticQueue<InElementType, InCapacity>::Push(ConstElementTypeLRef element)
+	{
+		this->PushBack(element);
 	}
 
 	template<typename InElementType, Size InCapacity>
@@ -130,32 +152,32 @@ namespace Forge
 	{
 		this->m_container.PopFront();
 
-		this->m_count = this->m_container.m_count;
+		this->m_count = this->m_container.GetCount();
 	}
 
 	template<typename InElementType, Size InCapacity>
 	Void StaticQueue<InElementType, InCapacity>::PushBack(ElementTypeRRef element)
 	{
-		throw std::logic_error("A queue only allows insertion to the front element");
+		this->m_container.PushBack(::std::move(element));
+
+		this->m_count = this->m_container.GetCount();
 	}
 	template<typename InElementType, Size InCapacity>
 	Void StaticQueue<InElementType, InCapacity>::PushFront(ElementTypeRRef element)
 	{
-		this->m_container.PushFront(::std::move(element));
-
-		this->m_count = this->m_container.m_count;
+		throw std::logic_error("A queue only allows insertion to the front element");
 	}
 	template<typename InElementType, Size InCapacity>
 	Void StaticQueue<InElementType, InCapacity>::PushBack(ConstElementTypeLRef element)
 	{
-		throw std::logic_error("A queue only allows insertion to the front element");
+		this->m_container.PushBack(element);
+
+		this->m_count = this->m_container.GetCount();
 	}
 	template<typename InElementType, Size InCapacity>
 	Void StaticQueue<InElementType, InCapacity>::PushFront(ConstElementTypeLRef element)
 	{
-		this->m_container.PushFront(element);
-
-		this->m_count = this->m_container.m_count;
+		throw std::logic_error("A queue only allows insertion to the front element");
 	}
 
 	template<typename InElementType, Size InCapacity>
@@ -222,6 +244,6 @@ namespace Forge
 	{
 		this->m_container.Clear();
 
-		this->m_count = this->m_container.m_count;
+		this->m_count = this->m_container.GetCount();
 	}
 }
