@@ -104,7 +104,7 @@ namespace Forge
 		/**
 		 * @brief Retrieves the top element in the collection.
 		 *
-		 * This function effectively calls GetFrontElement()
+		 * This function effectively calls GetFront()
 		 *
 		 * @return A const reference to the top element.
 		 */
@@ -194,14 +194,30 @@ namespace Forge
 		 *
 		 * @throws std::logic_error if used, as it is illegal for a queue.
 		 */
-		ConstElementTypeLRef GetBackElement() const override;
+		ElementTypeLRef GetBack() override;
+
+		/**
+		 * @brief Retrieves the first element in the collection.
+		 *
+		 * @return A reference to the first element.
+		 */
+		ElementTypeLRef GetFront() override;
+
+		/**
+		 * @brief Retrieves the last element in the collection.
+		 *
+		 * @return A const reference to the last element.
+		 *
+		 * @throws std::logic_error if used, as it is illegal for a queue.
+		 */
+		ConstElementTypeLRef GetBack() const override;
 
 		/**
 		 * @brief Retrieves the first element in the collection.
 		 *
 		 * @return A const reference to the first element.
 		 */
-		ConstElementTypeLRef GetFrontElement() const override;
+		ConstElementTypeLRef GetFront() const override;
 
 	private:
 		/**

@@ -204,7 +204,7 @@ namespace Forge
 		return this->m_data;
 	}
 	template <typename InElementType, Size InCapacity>
-	typename StaticArray<InElementType, InCapacity>::ConstElementTypeLRef StaticArray<InElementType, InCapacity>::GetBackElement() const
+	typename StaticArray<InElementType, InCapacity>::ElementTypeLRef StaticArray<InElementType, InCapacity>::GetBack()
 	{
 		if (this->IsEmpty())
 			throw ::std::length_error("The static array is empty");
@@ -212,7 +212,23 @@ namespace Forge
 		return this->m_data[this->m_count - 1];
 	}
 	template <typename InElementType, Size InCapacity>
-	typename StaticArray<InElementType, InCapacity>::ConstElementTypeLRef StaticArray<InElementType, InCapacity>::GetFrontElement() const
+	typename StaticArray<InElementType, InCapacity>::ElementTypeLRef StaticArray<InElementType, InCapacity>::GetFront()
+	{
+		if (this->IsEmpty())
+			throw ::std::length_error("The static array is empty");
+
+		return this->m_data[0];
+	}
+	template <typename InElementType, Size InCapacity>
+	typename StaticArray<InElementType, InCapacity>::ConstElementTypeLRef StaticArray<InElementType, InCapacity>::GetBack() const
+	{
+		if (this->IsEmpty())
+			throw ::std::length_error("The static array is empty");
+
+		return this->m_data[this->m_count - 1];
+	}
+	template <typename InElementType, Size InCapacity>
+	typename StaticArray<InElementType, InCapacity>::ConstElementTypeLRef StaticArray<InElementType, InCapacity>::GetFront() const
 	{
 		if (this->IsEmpty())
 			throw ::std::length_error("The static array is empty");

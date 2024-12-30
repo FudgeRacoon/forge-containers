@@ -220,16 +220,30 @@ namespace Forge
 		/**
 		 * @brief Retrieves the last element in the collection.
 		 *
-		 * @return A const reference to the last element.
+		 * @return A reference to the last element.
 		 */
-		ConstElementTypeLRef GetBackElement() const override;
+		ElementTypeLRef GetBack() override;
 
 		/**
 		 * @brief Retrieves the first element in the collection.
 		 *
 		 * @return A const reference to the first element.
 		 */
-		ConstElementTypeLRef GetFrontElement() const override;
+		ElementTypeLRef GetFront() override;
+
+		/**
+		 * @brief Retrieves the last element in the collection.
+		 *
+		 * @return A const reference to the last element.
+		 */
+		ConstElementTypeLRef GetBack() const override;
+
+		/**
+		 * @brief Retrieves the first element in the collection.
+		 *
+		 * @return A const reference to the first element.
+		 */
+		ConstElementTypeLRef GetFront() const override;
 
 	public:
 		/**

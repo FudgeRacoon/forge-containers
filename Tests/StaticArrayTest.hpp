@@ -302,29 +302,29 @@ TEST_F(StaticArrayTest, GetRawData_NonEmptyArray_ReturnsConstPtrToInternalBuffer
 }
 
 // -------------------------
-// GetBackElement Function.
+// GetBack Function.
 // -------------------------
 TEST_F(StaticArrayTest, GetBackElement_EmptyArray_ThrowsLengthErrorException)
 {
-	EXPECT_THROW(fixture_empty_array.GetBackElement(), std::length_error);
+	EXPECT_THROW(fixture_empty_array.GetBack(), std::length_error);
 }
 
 TEST_F(StaticArrayTest, GetBackElement_NonEmptyArray_ReturnsConstRefToBackElement)
 {
-	EXPECT_EQ(fixture_nonempty_array.GetBackElement(), DEFAULT_BUFFER[DEFAULT_COUNT - 1]);
+	EXPECT_EQ(fixture_nonempty_array.GetBack(), DEFAULT_BUFFER[DEFAULT_COUNT - 1]);
 }
 
 // -------------------------
-// GetFrontElement Function.
+// GetFront Function.
 // -------------------------
 TEST_F(StaticArrayTest, GetFrontElement_EmptyArray_ThrowsLengthErrorException)
 {
-	EXPECT_THROW(fixture_empty_array.GetFrontElement(), std::length_error);
+	EXPECT_THROW(fixture_empty_array.GetFront(), std::length_error);
 }
 
 TEST_F(StaticArrayTest, GetFrontElement_NonEmptyArray_ReturnsConstRefToFrontElement)
 {
-	EXPECT_EQ(fixture_nonempty_array.GetFrontElement(), DEFAULT_BUFFER[DEFAULT_COUNT - 5]);
+	EXPECT_EQ(fixture_nonempty_array.GetFront(), DEFAULT_BUFFER[DEFAULT_COUNT - 5]);
 }
 
 // -------------------------

@@ -84,7 +84,7 @@ namespace Forge
 	template<typename InElementType, Size InCapacity>
 	typename StaticQueue<InElementType, InCapacity>::ConstElementTypeLRef StaticQueue<InElementType, InCapacity>::Peek() const
 	{
-		return this->GetFrontElement();
+		return this->GetFront();
 	}
 
 	template<typename InElementType, Size InCapacity>
@@ -132,14 +132,24 @@ namespace Forge
 		return this->m_container.GetRawData();
 	}
 	template<typename InElementType, Size InCapacity>
-	typename StaticQueue<InElementType, InCapacity>::ConstElementTypeLRef StaticQueue<InElementType, InCapacity>::GetBackElement() const
+	typename StaticQueue<InElementType, InCapacity>::ElementTypeLRef StaticQueue<InElementType, InCapacity>::GetBack()
 	{
 		throw std::logic_error("A queue only allows access to the front element");
 	}
 	template<typename InElementType, Size InCapacity>
-	typename StaticQueue<InElementType, InCapacity>::ConstElementTypeLRef StaticQueue<InElementType, InCapacity>::GetFrontElement() const
+	typename StaticQueue<InElementType, InCapacity>::ElementTypeLRef StaticQueue<InElementType, InCapacity>::GetFront()
 	{
-		return this->m_container.GetFrontElement();
+		return this->m_container.GetFront();
+	}
+	template<typename InElementType, Size InCapacity>
+	typename StaticQueue<InElementType, InCapacity>::ConstElementTypeLRef StaticQueue<InElementType, InCapacity>::GetBack() const
+	{
+		throw std::logic_error("A queue only allows access to the front element");
+	}
+	template<typename InElementType, Size InCapacity>
+	typename StaticQueue<InElementType, InCapacity>::ConstElementTypeLRef StaticQueue<InElementType, InCapacity>::GetFront() const
+	{
+		return this->m_container.GetFront();
 	}
 
 	template<typename InElementType, Size InCapacity>
@@ -165,7 +175,7 @@ namespace Forge
 	template<typename InElementType, Size InCapacity>
 	Void StaticQueue<InElementType, InCapacity>::PushFront(ElementTypeRRef element)
 	{
-		throw std::logic_error("A queue only allows insertion to the front element");
+		throw std::logic_error("A queue only allows insertion to the back element");
 	}
 	template<typename InElementType, Size InCapacity>
 	Void StaticQueue<InElementType, InCapacity>::PushBack(ConstElementTypeLRef element)
@@ -177,7 +187,7 @@ namespace Forge
 	template<typename InElementType, Size InCapacity>
 	Void StaticQueue<InElementType, InCapacity>::PushFront(ConstElementTypeLRef element)
 	{
-		throw std::logic_error("A queue only allows insertion to the front element");
+		throw std::logic_error("A queue only allows insertion to the back element");
 	}
 
 	template<typename InElementType, Size InCapacity>
@@ -210,23 +220,23 @@ namespace Forge
 	template<typename InElementType, Size InCapacity>
 	Void StaticQueue<InElementType, InCapacity>::Insert(Size index, ElementTypeRRef element)
 	{
-		throw std::logic_error("A queue only allows insertion to the front element");
+		throw std::logic_error("A queue only allows insertion to the back element");
 	}
 	template<typename InElementType, Size InCapacity>
 	Void StaticQueue<InElementType, InCapacity>::Insert(Size index, ConstElementTypeLRef element)
 	{
-		throw std::logic_error("A queue only allows insertion to the front element");
+		throw std::logic_error("A queue only allows insertion to the back element");
 	}
 	template<typename InElementType, Size InCapacity>
 	Void StaticQueue<InElementType, InCapacity>::Insert(Size index, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_first, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_last)
 	{
-		throw std::logic_error("A queue only allows insertion to the front element");
+		throw std::logic_error("A queue only allows insertion to the back element");
 	}
 
 	template<typename InElementType, Size InCapacity>
 	Void StaticQueue<InElementType, InCapacity>::InsertAll(typename BaseType::ConstSelfTypeLRef collection)
 	{
-		throw std::logic_error("A queue only allows insertion to the front element");
+		throw std::logic_error("A queue only allows insertion to the back element");
 	}
 	template<typename InElementType, Size InCapacity>
 	Void StaticQueue<InElementType, InCapacity>::RemoveAll(typename BaseType::ConstSelfTypeLRef collection)

@@ -84,7 +84,7 @@ namespace Forge
 	template<typename InElementType, Size InCapacity>
 	typename StaticStack<InElementType, InCapacity>::ConstElementTypeLRef StaticStack<InElementType, InCapacity>::Peek() const
 	{
-		return this->GetBackElement();
+		return this->GetBack();
 	}
 
 	template<typename InElementType, Size InCapacity>
@@ -132,12 +132,22 @@ namespace Forge
 		return this->m_container.GetRawData();
 	}
 	template<typename InElementType, Size InCapacity>
-	typename StaticStack<InElementType, InCapacity>::ConstElementTypeLRef StaticStack<InElementType, InCapacity>::GetBackElement() const
+	typename StaticStack<InElementType, InCapacity>::ElementTypeLRef StaticStack<InElementType, InCapacity>::GetBack()
 	{
-		return this->m_container.GetBackElement();
+		return this->m_container.GetBack();
 	}
 	template<typename InElementType, Size InCapacity>
-	typename StaticStack<InElementType, InCapacity>::ConstElementTypeLRef StaticStack<InElementType, InCapacity>::GetFrontElement() const
+	typename StaticStack<InElementType, InCapacity>::ElementTypeLRef StaticStack<InElementType, InCapacity>::GetFront()
+	{
+		throw std::logic_error("A stack only allows access to the back element");
+	}
+	template<typename InElementType, Size InCapacity>
+	typename StaticStack<InElementType, InCapacity>::ConstElementTypeLRef StaticStack<InElementType, InCapacity>::GetBack() const
+	{
+		return this->m_container.GetBack();
+	}
+	template<typename InElementType, Size InCapacity>
+	typename StaticStack<InElementType, InCapacity>::ConstElementTypeLRef StaticStack<InElementType, InCapacity>::GetFront() const
 	{
 		throw std::logic_error("A stack only allows access to the back element");
 	}

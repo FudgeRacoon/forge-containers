@@ -97,16 +97,30 @@ namespace Forge
 		/**
 		 * @brief Retrieves the last element in the collection.
 		 *
+		 * @return A reference to the last element.
+		 */
+		virtual ElementTypeLRef GetBack() = 0;
+
+		/**
+		 * @brief Retrieves the first element in the collection.
+		 *
+		 * @return A reference to the first element.
+		 */
+		virtual ElementTypeLRef GetFront() = 0;
+
+		/**
+		 * @brief Retrieves the last element in the collection.
+		 *
 		 * @return A const reference to the last element.
 		 */
-		virtual ConstElementTypeLRef GetBackElement() const = 0;
+		virtual ConstElementTypeLRef GetBack() const = 0;
 
 		/**
 		 * @brief Retrieves the first element in the collection.
 		 *
 		 * @return A const reference to the first element.
 		 */
-		virtual ConstElementTypeLRef GetFrontElement() const = 0;
+		virtual ConstElementTypeLRef GetFront() const = 0;
 
 	public:
 		/**
