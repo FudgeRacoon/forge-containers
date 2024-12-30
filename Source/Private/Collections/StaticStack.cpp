@@ -83,6 +83,29 @@ namespace Forge
 	}
 
 	template<typename InElementType, Size InCapacity>
+	typename StaticStack<InElementType, InCapacity>::ConstElementTypeLRef StaticStack<InElementType, InCapacity>::Peek() const
+	{
+		return this->GetBackElement();
+	}
+
+	template<typename InElementType, Size InCapacity>
+	Void StaticStack<InElementType, InCapacity>::Pop()
+	{
+		this->PopBack();
+	}
+
+	template<typename InElementType, Size InCapacity>
+	Void StaticStack<InElementType, InCapacity>::Push(ElementTypeRRef element)
+	{
+		this->PushBack(::std::move(element));
+	}
+	template<typename InElementType, Size InCapacity>
+	Void StaticStack<InElementType, InCapacity>::Push(ConstElementTypeLRef element)
+	{
+		this->PushBack(element);
+	}
+
+	template<typename InElementType, Size InCapacity>
 	typename AbstractIterator<InElementType>::SelfTypeLRef StaticStack<InElementType, InCapacity>::GetBeginIterator()
 	{
 		throw std::logic_error("A stack only allows access to the back element");

@@ -85,7 +85,8 @@ namespace Forge
 		 */
 		SelfTypeLRef operator=(ConstSelfTypeLRef other);
 
-	public:
+
+	private:
 		/**
 		 * @brief Array Subscript Operator.
 		 *
@@ -101,6 +102,43 @@ namespace Forge
 		ConstElementTypeLRef operator[](Size index) const override;
 
 	public:
+		/**
+		 * @brief Retrieves the top element in the collection.
+		 *
+		 * This function effectively calls GetBackElement()
+		 *
+		 * @return A const reference to the top element.
+		 */
+		ConstElementTypeLRef Peek() const;
+
+	public:
+		/**
+		 * @brief Removes the top element in the collection.
+		 *
+		 * This function effectively calls PopBack()
+		 */
+		Void Pop();
+
+	public:
+		/**
+		 * @brief Inserts an element at the top of the collection.
+		 *
+		 * This function effectively calls PushBack()
+		 *
+		 * @param element The element to be moved and added.
+		 */
+		Void Push(ElementTypeRRef element);
+
+		/**
+		 * @brief Inserts an element at the top of the collection.
+		 *
+		 * This function effectively calls PushBack()
+		 *
+		 * @param element The element to be copied and added.
+		 */
+		Void Push(ConstElementTypeLRef element);
+
+	private:
 		/**
 		 * @brief Gets an iterator pointing to the first element in the collection.
 		 *
@@ -119,7 +157,7 @@ namespace Forge
 		 */
 		typename AbstractIterator<ElementType>::SelfTypeLRef GetFinalIterator() override;
 
-	public:
+	private:
 		/**
 		 * @brief Retrieves a reference to the element at a specified position, with bounds checking.
 		 *
@@ -142,7 +180,7 @@ namespace Forge
 		 */
 		ConstElementTypeLRef At(Size index) const override;
 
-	public:
+	private:
 		/**
 		 * @brief Retrieves a pointer to the underlying data array.
 		 *
@@ -166,7 +204,7 @@ namespace Forge
 		 */
 		ConstElementTypeLRef GetFrontElement() const override;
 
-	public:
+	private:
 		/**
 		 * @brief Removes the last element in the collection.
 		 */
@@ -179,7 +217,7 @@ namespace Forge
 		 */
 		Void PopFront() override;
 
-	public:
+	private:
 		/**
 		 * @brief Inserts an element at the end of the collection.
 		 *
@@ -212,7 +250,7 @@ namespace Forge
 		 */
 		Void PushFront(ConstElementTypeLRef element) override;
 
-	public:
+	private:
 		/**
 		 * @brief Removes the element at the specified index.
 		 *
@@ -232,7 +270,7 @@ namespace Forge
 		 */
 		Void Remove(typename AbstractIterator<ElementType>::SelfTypeLRef iterator_first, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_last) override;
 
-	public:
+	private:
 		/**
 		 * @brief Assigns a new element at the specified index.
 		 *
@@ -264,7 +302,7 @@ namespace Forge
 		 */
 		Void Assign(Size index, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_first, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_last) override;
 
-	public:
+	private:
 		/**
 		 * @brief Inserts an element at the specified index.
 		 *
@@ -296,7 +334,7 @@ namespace Forge
 		 */
 		Void Insert(Size index, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_first, typename AbstractIterator<ElementType>::SelfTypeLRef iterator_last) override;
 
-	public:
+	private:
 		/**
 		 * @brief Inserts all elements in the specified collection into this collection.
 		 *
