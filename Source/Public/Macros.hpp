@@ -61,6 +61,14 @@ public:																		\
 	using ElementTypeRRef = InElementType&&;								\
 	using ConstElementType = const InElementType;							\
 	using ConstElementTypePtr = const InElementType*;						\
-	using ConstElementTypeLRef = const InElementType&;
+	using ConstElementTypeLRef = const InElementType&;						\
+																			\
+	using AllocatorType = Allocator<InAllocationPolicy>;					\
+	using AllocatorTypePtr = Allocator<InAllocationPolicy>*;				\
+	using AllocatorTypeLRef = Allocator<InAllocationPolicy>&;				\
+	using AllocatorTypeRRef = Allocator<InAllocationPolicy>&&;				\
+	using ConstAllocatorType = const Allocator<InAllocationPolicy>;			\
+	using ConstAllocatorTypePtr = const Allocator<InAllocationPolicy>*;		\
+	using ConstAllocatorTypeLRef = const Allocator<InAllocationPolicy>&;	\
 
 #endif

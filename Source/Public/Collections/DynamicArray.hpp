@@ -90,17 +90,17 @@ namespace Forge
 		enum MemoryStorage {
 			INTERNAL = 0,
 			EXTERNAL
-		};
+		} m_memory_storage;
 
 		enum MemoryAlignment {
 			ALIGNMENT_4 = 0,
 			ALIGNMENT_8,
 			ALIGNMENT_16
-		};
+		} m_memory_alignment;
 
 	private:
 		class IteratorImpl;
-		::std::unique_ptr<IteratorImpl> m_pImpl;
+		::std::unique_ptr<IteratorImpl> m_pimpl;
 
 	private:
 		ElementTypePtr m_data;
@@ -111,35 +111,35 @@ namespace Forge
 		 *
 		 * Initializes an empty dynamic array with no capacity.
 		 */
-		DynamicArray(Allocator<InAllocationPolicy>* allocator = nullptr);
+		DynamicArray(AllocatorTypePtr allocator = nullptr);
 
 		/**
 		 * @brief Intial Capacity Constructor.
 		 *
 		 * Initializes an empty dynamic array with the specified capacity.
 		 */
-		DynamicArray(Size capacity, Allocator<InAllocationPolicy>* allocator = nullptr);
+		DynamicArray(Size capacity, AllocatorTypePtr allocator = nullptr);
 
 		/**
 		 * @brief Fill Constructor.
 		 *
 		 * Initializes a dynamic array and fills it with the specified value and count.
 		 */
-		DynamicArray(ConstElementTypeLRef value, Size count, Allocator<InAllocationPolicy>* allocator = nullptr);
+		DynamicArray(ConstElementTypeLRef value, Size count, AllocatorTypePtr allocator = nullptr);
 
 		/**
 		 * @brief Buffer Constructor.
 		 *
 		 * Initializes a dynamic array and fills it with the specified buffer and count.
 		 */
-		DynamicArray(ConstElementTypePtr buffer, Size count, Allocator<InAllocationPolicy>* allocator = nullptr);
+		DynamicArray(ConstElementTypePtr buffer, Size count, AllocatorTypePtr allocator = nullptr);
 
 		/**
 		 * @brief Initializer list Constructor.
 		 *
 		 * Initializes an empty dynamic array with the specified initializer list.
 		 */
-		DynamicArray(std::initializer_list<ElementType> list, Allocator<InAllocationPolicy>* allocator = nullptr);
+		DynamicArray(std::initializer_list<ElementType> init_list, AllocatorTypePtr allocator = nullptr);
 
 	public:
 		/**

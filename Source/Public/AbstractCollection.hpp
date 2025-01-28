@@ -43,20 +43,20 @@ namespace Forge
 		using ConstElementTypeLRef = const InElementType&;
 
 	public:
-		using AllocatorType = InAllocatorPolicy;
-		using AllocatorTypePtr = InAllocatorPolicy*;
-		using AllocatorTypeLRef = InAllocatorPolicy&;
-		using AllocatorTypeRRef = InAllocatorPolicy&&;
-		using ConstAllocatorType = const InAllocatorPolicy;
-		using ConstAllocatorTypePtr = const InAllocatorPolicy*;
-		using ConstAllocatorTypeLRef = const InAllocatorPolicy&;
+		using AllocatorType = Allocator<InAllocatorPolicy>;
+		using AllocatorTypePtr = Allocator<InAllocatorPolicy>*;
+		using AllocatorTypeLRef = Allocator<InAllocatorPolicy>&;
+		using AllocatorTypeRRef = Allocator<InAllocatorPolicy>&&;
+		using ConstAllocatorType = const Allocator<InAllocatorPolicy>;
+		using ConstAllocatorTypePtr = const Allocator<InAllocatorPolicy>*;
+		using ConstAllocatorTypeLRef = const Allocator<InAllocatorPolicy>&;
 
 	protected:
 		Size m_count;
 		Size m_capacity;
 
 	protected:
-		Allocator<InAllocatorPolicy> m_allocator;
+		AllocatorTypePtr m_allocator;
 
 	public:
 		/**
