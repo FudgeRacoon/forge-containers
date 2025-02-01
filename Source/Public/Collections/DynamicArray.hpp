@@ -100,7 +100,7 @@ namespace Forge
 
 	private:
 		class IteratorImpl;
-		::std::unique_ptr<IteratorImpl> m_pimpl;
+		::std::unique_ptr<IteratorImpl> m_iterator_pimpl;
 
 	private:
 		ElementTypePtr m_data;
@@ -213,12 +213,6 @@ namespace Forge
 		ConstElementTypeLRef At(Size index) const override;
 
 	public:
-		/**
-		 * @brief Retrieves a pointer to the underlying data array.
-		 *
-		 * @return A const pointer to the the underlying data array.
-		 */
-		ConstElementTypePtr GetRawData() const override;
 
 		/**
 		 * @brief Retrieves the last element in the collection.
@@ -247,6 +241,20 @@ namespace Forge
 		 * @return A const reference to the first element.
 		 */
 		ConstElementTypeLRef GetFront() const override;
+
+		/**
+		 * @brief Retrieves a pointer to the underlying data array.
+		 *
+		 * @return A const pointer to the the underlying data array.
+		 */
+		ConstElementTypePtr GetRawData() const override;
+
+	public:
+		Void Compact();
+
+		Void Resize(Size capacity);
+
+		Void Reserve(Size capacity);
 
 	public:
 		/**
@@ -281,7 +289,7 @@ namespace Forge
 		 */
 		Void PushBack(ConstElementTypeLRef element) override;
 
-				/**
+		/**
 		 * @brief Inserts an element at the start of the collection.
 		 *
 		 * @param element The element to be copied and added.
@@ -387,13 +395,6 @@ namespace Forge
 		 * @return True if all the elements were found, otherwise false.
 		 */
 		Bool ContainsAll(typename BaseType::ConstSelfTypeLRef collection) override;
-
-	public:
-		Void Compact();
-
-		Void Resize(Size capacity);
-
-		Void Reserve(Size capacity);
 
 	public:
 		/**
