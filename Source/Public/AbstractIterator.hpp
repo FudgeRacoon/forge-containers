@@ -1,7 +1,8 @@
 #ifndef ABSTRACT_ITERATOR_HPP
 #define ABSTRACT_ITERATOR_HPP
 
-#include "Compiler.hpp"
+#include <forge-base/Core/Types.hpp>
+#include <forge-base/Core/System.hpp>
 
 namespace Forge
 {
@@ -155,6 +156,6 @@ namespace Forge
 	};
 }
 
-#include "../Private/AbstractIterator_inl.hpp"
+#include "../Private/AbstractIterator.inl"
 
 #endif

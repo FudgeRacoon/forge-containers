@@ -2,9 +2,6 @@
 #define STATIC_QUEUE_HPP
 
 #include "StaticArray.hpp"
-#include "AbstractSequencedCollection.hpp"
-
-#include "Memory/Policies/NoAllocationPolicy.hpp"
 
 namespace Forge
 {

@@ -1,9 +1,9 @@
-include(FetchContent)
-
 set(BUILD_GMOCK OFF CACHE BOOL "Disable building of Google Mock")
 set(INSTALL_GTEST OFF CACHE BOOL "Disable installation of Google Test")
 set(gtest_build_tests OFF CACHE BOOL "Disable building of Google Test tests")
 set(gtest_build_samples OFF CACHE BOOL "Disable building of Google Test samples")
+
+include(FetchContent)
 
 FetchContent_Declare(
 	googletest
@@ -11,10 +11,8 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-add_executable(Tests main.cpp)
-
-target_link_libraries(Tests gtest)
-target_include_directories(Tests PRIVATE ${CMAKE_SOURCE_DIR}/Source/Public)
+add_executable(tests main.cpp)
+target_link_libraries(tests PRIVATE gtest forge_containers)
 
 include(GoogleTest)
-gtest_discover_tests(Tests)
+gtest_discover_tests(tests)

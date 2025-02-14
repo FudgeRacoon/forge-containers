@@ -2,15 +2,16 @@
 #define ABSTRACT_COLLECTION_HPP
 
 #include "Macros.hpp"
-#include "Compiler.hpp"
 
 #include "IIterable.hpp"
 #include "AbstractIterator.hpp"
 
-#include "Memory/Allocator.hpp"
-#include "Memory/MemoryUtilities.hpp"
-#include "Memory/Policies/NoAllocationPolicy.hpp"
-#include "Memory/Policies/HeapAllocationPolicy.hpp"
+#include <forge-base/Core/Types.hpp>
+#include <forge-base/Core/System.hpp>
+
+#include <forge-memory/MemoryUtilities.hpp>
+#include <forge-memory/Policies/NoAllocationPolicy.hpp>
+#include <forge-memory/Policies/HeapAllocationPolicy.hpp>
 
 namespace Forge
 {
@@ -203,6 +204,6 @@ namespace Forge
 	};
 }
 
-#include "../Private/AbstractCollection_inl.hpp"
+#include "../Private/AbstractCollection.inl"
 
 #endif
