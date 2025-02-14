@@ -4,7 +4,8 @@
 #include <utility>
 
 #include "AbstractIterator.hpp"
-#include "Memory/MemoryUtilities.hpp"
+
+#include <forge-memory/MemoryUtilities.hpp>
 
 namespace Forge
 {

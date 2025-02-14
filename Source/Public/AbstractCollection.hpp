@@ -9,6 +9,7 @@
 #include <forge-base/Core/Types.hpp>
 #include <forge-base/Core/System.hpp>
 
+#include <forge-memory/Allocator.hpp>
 #include <forge-memory/MemoryUtilities.hpp>
 #include <forge-memory/Policies/NoAllocationPolicy.hpp>
 #include <forge-memory/Policies/HeapAllocationPolicy.hpp>
