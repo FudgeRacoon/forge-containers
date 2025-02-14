@@ -1,13 +1,12 @@
-
 # Forge Containers
+<p>
+	<img src="forge-containers-logo.png" align="left" width="200" style="float: left; margin-right: 15px;">
+	Forge Containers offers a clean, easy and powerful interface similar to the Java Collection Framework. It competes with the C++ Standard Template Library (STL) that may feel challenging to work with for beginners. By providing data structures and interfaces that mirror those in Java, this library simplifies the development process and eases adaptation to C++.
+</p>
 
-Forge Containers offers a clean, easy and powerful interface similar to the Java Collection Framework. It competes with the C++ Standard Template Library (STL) that my feel challenging to work with for beginners. By providing data structures and interfaces that mirror those in Java, this library simplifies the development process and eases adaptation to C++.
-
-If you're a developer who finds the C++ Standard Template Library (STL) cumbersome, Forge Containers is your solution, it allows you to:
-
-- **Leverage Familiarity**: Write clean, readable, and intuitive code using familiar patterns.
-- **Focus on Development**: Spend less time learning complicated APIs and more time building.
-
+<p>
+	If you're a developer who finds the C++ Standard Template Library (STL) cumbersome, Forge Containers is your solution. It allows you to write clean, readable, and intuitive code using familiar patterns and spend less time learning complicated APIs and more time building.
+</p>
 
 ## Features
 

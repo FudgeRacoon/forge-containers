@@ -103,10 +103,6 @@ namespace Forge
 		};
 
 	private:
-		class IteratorImpl;
-		::std::unique_ptr<IteratorImpl> m_pImpl;
-
-	private:
 		ElementType m_data[InCapacity];
 
 	public:
@@ -122,7 +118,7 @@ namespace Forge
 		 *
 		 * Initializes a static array and fills it with the specified value and count.
 		 */
-		StaticArray(ElementType value, Size count);
+		StaticArray(ConstElementTypeLRef value, Size count);
 
 		/**
 		 * @brief Buffer Constructor.
@@ -211,13 +207,6 @@ namespace Forge
 
 	public:
 		/**
-		 * @brief Retrieves a pointer to the underlying data array.
-		 *
-		 * @return A const pointer to the the underlying data array.
-		 */
-		ConstElementTypePtr GetRawData() const override;
-
-		/**
 		 * @brief Retrieves the last element in the collection.
 		 *
 		 * @return A reference to the last element.
@@ -236,7 +225,7 @@ namespace Forge
 		 *
 		 * @return A const reference to the last element.
 		 */
-		ConstElementTypeLRef GetBack() const override;
+			ConstElementTypeLRef GetBack() const override;
 
 		/**
 		 * @brief Retrieves the first element in the collection.
@@ -244,6 +233,13 @@ namespace Forge
 		 * @return A const reference to the first element.
 		 */
 		ConstElementTypeLRef GetFront() const override;
+
+		/**
+		 * @brief Retrieves a pointer to the underlying data array.
+		 *
+		 * @return A const pointer to the the underlying data array.
+		 */
+		ConstElementTypePtr GetRawData() const override;
 
 	public:
 		/**

@@ -65,9 +65,6 @@ TEST_F(StaticArrayTest, DefaultConstructor_EmptyArray_SetMemoryToZero)
 	EXPECT_EQ(test_array.GetSize(), DEFAULT_SIZE);
 	EXPECT_EQ(test_array.GetCount(), 0);
 	EXPECT_EQ(test_array.GetCapacity(), DEFAULT_CAPACITY);
-
-	for (Size counter = 0; counter < DEFAULT_CAPACITY; counter++)
-		EXPECT_EQ(test_array[counter], 0);
 }
 
 // -------------------------
@@ -286,13 +283,6 @@ TEST_F(StaticArrayTest, At_NonEmptyArray_ReturnsConstRefToAllElements)
 // -------------------------
 // GetRawData Function.
 // -------------------------
-TEST_F(StaticArrayTest, GetRawData_EmptyArray_ReturnsConstPtrToInternalBuffer)
-{
-	const DEFAULT_TYPE* buffer = fixture_empty_array.GetRawData();
-
-	for (Size counter = 0; counter < DEFAULT_COUNT; counter++)
-		EXPECT_EQ(buffer[counter], 0);
-}
 TEST_F(StaticArrayTest, GetRawData_NonEmptyArray_ReturnsConstPtrToInternalBuffer)
 {
 	const DEFAULT_TYPE* buffer = fixture_nonempty_array.GetRawData();
@@ -395,7 +385,8 @@ TEST_F(StaticArrayTest, PushBack_EmptyArray_PushesRValueElementAtTheBack)
 	EXPECT_EQ(test_empty_array.GetCount(), 0);
 	EXPECT_EQ(test_empty_array.GetCapacity(), DEFAULT_CAPACITY);
 
-	test_empty_array.PushBack(std::move(DEFAULT_VALUE));
+	DEFAULT_TYPE rvalue = DEFAULT_VALUE;
+	test_empty_array.PushBack(std::move(rvalue));
 
 	EXPECT_EQ(test_empty_array.GetSize(), DEFAULT_SIZE);
 	EXPECT_EQ(test_empty_array.GetCount(), 1);
@@ -428,7 +419,8 @@ TEST_F(StaticArrayTest, PushBack_NonEmptyArray_PushesRValueElementAtTheBack)
 	EXPECT_EQ(test_nonempty_array.GetCount(), DEFAULT_COUNT);
 	EXPECT_EQ(test_nonempty_array.GetCapacity(), DEFAULT_CAPACITY);
 
-	test_nonempty_array.PushBack(std::move(DEFAULT_VALUE));
+	DEFAULT_TYPE rvalue = DEFAULT_VALUE;
+	test_nonempty_array.PushBack(std::move(rvalue));
 
 	EXPECT_EQ(test_nonempty_array.GetSize(), DEFAULT_SIZE);
 	EXPECT_EQ(test_nonempty_array.GetCount(), DEFAULT_COUNT + 1);
@@ -469,7 +461,8 @@ TEST_F(StaticArrayTest, PushFront_EmptyArray_PushesRValueElementAtTheFront)
 	EXPECT_EQ(test_empty_array.GetCount(), 0);
 	EXPECT_EQ(test_empty_array.GetCapacity(), DEFAULT_CAPACITY);
 
-	test_empty_array.PushFront(std::move(DEFAULT_VALUE));
+	DEFAULT_TYPE rvalue = DEFAULT_VALUE;
+	test_empty_array.PushFront(std::move(rvalue));
 
 	EXPECT_EQ(test_empty_array.GetSize(), DEFAULT_SIZE);
 	EXPECT_EQ(test_empty_array.GetCount(), 1);
@@ -502,7 +495,8 @@ TEST_F(StaticArrayTest, PushFront_NonEmptyArray_PushesRValueElementAtTheFront)
 	EXPECT_EQ(test_nonempty_array.GetCount(), DEFAULT_COUNT);
 	EXPECT_EQ(test_nonempty_array.GetCapacity(), DEFAULT_CAPACITY);
 
-	test_nonempty_array.PushFront(std::move(DEFAULT_VALUE));
+	DEFAULT_TYPE rvalue = DEFAULT_VALUE;
+	test_nonempty_array.PushFront(std::move(rvalue));
 
 	EXPECT_EQ(test_nonempty_array.GetSize(), DEFAULT_SIZE);
 	EXPECT_EQ(test_nonempty_array.GetCount(), DEFAULT_COUNT + 1);

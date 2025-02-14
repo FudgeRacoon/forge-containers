@@ -6,7 +6,7 @@ namespace Forge
 	static FORGE_FORCE_INLINE Void _shift_elements_forward(InType* data, Size to, Size steps, Size jumps = 0)
 	{
 		while(steps--) {
-			MoveObject(data + to, *(data + ((to + 1) + jumps)));
+			MoveObject(data[to], data[(to + 1) + jumps]);
 
 			to++;
 		}
@@ -15,36 +15,11 @@ namespace Forge
 	static FORGE_FORCE_INLINE Void _shift_elements_backward(InType* data, Size to, Size steps, Size jumps = 0)
 	{
 		while(steps--) {
-			MoveObject(data + (to + jumps), *(data + (to - 1)));
+			MoveObject(data[to + jumps], data[to - 1]);
 
 			to--;
 		}
 	}
-
-	template <typename InElementType, Size InCapacity>
-	class StaticArray<InElementType, InCapacity>::IteratorImpl
-	{
-	public:
-		Iterator m_begin, m_final;
-
-	public:
-		IteratorImpl()
-			: m_begin(nullptr), m_final(nullptr) {}
-
-	public:
-		typename Iterator::SelfTypeLRef GetBeginIterator(ElementTypePtr ptr, Size count)
-		{
-			this->m_begin = Iterator(ptr);
-
-			return this->m_begin;
-		}
-		typename Iterator::SelfTypeLRef GetFinalIterator(ElementTypePtr ptr, Size count)
-		{
-			this->m_final = Iterator(ptr + count);
-
-			return this->m_final;
-		}
-	};
 
 	template <typename InElementType, Size InCapacity>
 	StaticArray<InElementType, InCapacity>::StaticArray()
@@ -52,13 +27,9 @@ namespace Forge
 	{
 		if (this->m_capacity <= 0)
 			throw ::std::invalid_argument("The capacity must be greater than 0");
-
-		this->m_pImpl = ::std::make_unique<IteratorImpl>();
-
-		MemoryZero(this->m_data, this->m_capacity * sizeof(ElementType));
 	}
 	template <typename InElementType, Size InCapacity>
-	StaticArray<InElementType, InCapacity>::StaticArray(ElementType value, Size count)
+	StaticArray<InElementType, InCapacity>::StaticArray(ConstElementTypeLRef value, Size count)
 		: BaseType(count, InCapacity)
 	{
 		if (this->m_capacity <= 0)
@@ -67,12 +38,8 @@ namespace Forge
 		if (this->m_count <= 0 || this->m_count > this->m_capacity)
 			throw ::std::invalid_argument("The count must be greater than 0 and less than the capacity");
 
-		this->m_pImpl = ::std::make_unique<IteratorImpl>();
-
-		MemoryZero(this->m_data, InCapacity * sizeof(ElementType));
-
 		for (Size counter = 0; counter <= this->m_count; counter++)
-			CopyObject((this->m_data + counter), value);
+			CopyObject(this->m_data[counter], value);
 	}
 	template <typename InElementType, Size InCapacity>
 	StaticArray<InElementType, InCapacity>::StaticArray(ElementTypePtr buffer, Size count)
@@ -83,10 +50,6 @@ namespace Forge
 
 		if (this->m_count <= 0 || this->m_count > this->m_capacity)
 			throw ::std::invalid_argument("The count must be greater than 0 and less than the capacity");
-
-		this->m_pImpl = ::std::make_unique<IteratorImpl>();
-
-		MemoryZero(this->m_data, InCapacity * sizeof(ElementType));
 
 		CopyArray(this->m_data, buffer, this->m_count);
 	}
@@ -100,11 +63,7 @@ namespace Forge
 		if (this->m_count <= 0 || this->m_count > this->m_capacity)
 			throw ::std::invalid_argument("The count must be greater than 0 and less than the capacity");
 
-		this->m_pImpl = ::std::make_unique<IteratorImpl>();
-
-		MemoryZero(this->m_data, InCapacity * sizeof(ElementType));
-
-		CopyArray(this->m_data, const_cast<InElementType*>(init_list.begin()), this->m_count);
+		CopyArray(this->m_data, init_list.begin(), this->m_count);
 	}
 
 	template <typename InElementType, Size InCapacity>
@@ -134,8 +93,6 @@ namespace Forge
 			this->Clear();
 
 			this->m_count = other.m_count;
-
-			this->m_pImpl = std::move(other.m_pImpl);
 
 			MoveArray(this->m_data, other.m_data, other.m_capacity);
 
@@ -173,12 +130,18 @@ namespace Forge
 	template <typename InElementType, Size InCapacity>
 	typename AbstractIterator<InElementType>::SelfTypeLRef StaticArray<InElementType, InCapacity>::GetBeginIterator()
 	{
-		return this->m_pImpl->GetBeginIterator(this->m_data, this->m_count);
+		static Iterator it;
+
+		it = Iterator(this->m_data);
+		return it;
 	}
 	template <typename InElementType, Size InCapacity>
 	typename AbstractIterator<InElementType>::SelfTypeLRef StaticArray<InElementType, InCapacity>::GetFinalIterator()
 	{
-		return this->m_pImpl->GetFinalIterator(this->m_data, this->m_count);
+		static Iterator it;
+
+		it = Iterator(this->m_data + this->m_count);
+		return it;
 	}
 
 	template <typename InElementType, Size InCapacity>
@@ -198,11 +161,6 @@ namespace Forge
 		return this->m_data[index];
 	}
 
-	template <typename InElementType, Size InCapacity>
-	typename StaticArray<InElementType, InCapacity>::ConstElementTypePtr StaticArray<InElementType, InCapacity>::GetRawData() const
-	{
-		return this->m_data;
-	}
 	template <typename InElementType, Size InCapacity>
 	typename StaticArray<InElementType, InCapacity>::ElementTypeLRef StaticArray<InElementType, InCapacity>::GetBack()
 	{
@@ -235,6 +193,11 @@ namespace Forge
 
 		return this->m_data[0];
 	}
+	template <typename InElementType, Size InCapacity>
+	typename StaticArray<InElementType, InCapacity>::ConstElementTypePtr StaticArray<InElementType, InCapacity>::GetRawData() const
+	{
+		return this->m_data;
+	}
 
 	template <typename InElementType, Size InCapacity>
 	Void StaticArray<InElementType, InCapacity>::PopBack()
@@ -261,7 +224,7 @@ namespace Forge
 		if (this->IsFull())
 			throw ::std::length_error("The static array is full");
 
-		MoveObject((this->m_data + this->m_count), element);
+		MoveObject(this->m_data[this->m_count], element);
 
 		this->m_count++;
 	}
@@ -274,7 +237,7 @@ namespace Forge
 		if (!this->IsEmpty())
 			_shift_elements_backward(this->m_data, this->m_count, this->m_count);
 
-		MoveObject(this->m_data, element);
+		MoveObject(this->m_data[0], element);
 
 		this->m_count++;
 	}
@@ -284,7 +247,7 @@ namespace Forge
 		if (this->IsFull())
 			throw ::std::length_error("The static array is full");
 
-		CopyObject((this->m_data + this->m_count), element);
+		CopyObject(this->m_data[this->m_count], element);
 
 		this->m_count++;
 	}
@@ -297,7 +260,7 @@ namespace Forge
 		if (!this->IsEmpty())
 			_shift_elements_backward(this->m_data, this->m_count, this->m_count);
 
-		CopyObject(this->m_data, element);
+		CopyObject(this->m_data[0], element);
 
 		this->m_count++;
 	}
